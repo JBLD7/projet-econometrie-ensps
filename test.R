@@ -1,4 +1,4 @@
-
+#Code - Économétrie
 
 #à exécuter en premier pour installer les packages
 install.packages('psidR')
