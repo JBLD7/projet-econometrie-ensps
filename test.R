@@ -15,7 +15,7 @@ f = dcast(f[,list(year,name,variable)],year~name, value.var = "variable")
 d = build.panel(datadir="~/projet-econometrie-ensps/data/PSID/",fam.vars=f,ind.vars=i, heads.only = TRUE,sample="SRC",design="all")
 
 #Pour récupérer des variables spécifiques 
-#Je mettrai le code plus tard
+#Je mettrai le code plus tard.
 
 
 
