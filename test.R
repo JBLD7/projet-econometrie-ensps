@@ -19,14 +19,6 @@ build.psid(datadr = "~/data/PSID", small = TRUE)
 
 build.psid(datadr = "/Users/jeanbaptistelagrangedupuis/Desktop/testR/data/PSID", small = TRUE)
 
-yes
-
-
-jean-baptiste.lagrange@ens-paris-saclay.fr
-
-
-NFUpqT8XiQtF
-
 install.packages("data.table")
 
 library(psidR)
@@ -50,13 +42,10 @@ head(i)
 
 head(f)
 
-
-setwd("git@github.com:JBLD7/projet-econometrie-ensps.git/")
-d = build.panel(datadir="~/projet-econometrie-ensps/data",fam.vars=f,ind.vars=i, heads.only = TRUE,sample="SRC",design="all")
+d = build.panel(datadir="~/projet-econometrie-ensps/data/PSID/",fam.vars=f,ind.vars=i, heads.only = TRUE,sample="SRC",design="all")
 
 individu <- d[d$year==2017]
 
-je fais un test pour voir si tout s'update'
 
 
 
