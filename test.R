@@ -25,7 +25,7 @@ yes
 jean-baptiste.lagrange@ens-paris-saclay.fr
 
 
-
+NFUpqT8XiQtF
 
 install.packages("data.table")
 
@@ -50,9 +50,13 @@ head(i)
 
 head(f)
 
-d = build.panel(datadir="/Users/jeanbaptistelagrangedupuis/Desktop/testR/data/PSID",fam.vars=f,ind.vars=i, heads.only = TRUE,sample="SRC",design="all")
+
+setwd("git@github.com:JBLD7/projet-econometrie-ensps.git/")
+d = build.panel(datadir="~/projet-econometrie-ensps/data",fam.vars=f,ind.vars=i, heads.only = TRUE,sample="SRC",design="all")
 
 individu <- d[d$year==2017]
+
+je fais un test pour voir si tout s'update'
 
 
 
