@@ -1,50 +1,18 @@
-library(haven)
-data <- read_sas('/Users/jeanbaptistelagrangedupuis/Library/Mobile Documents/com~apple~CloudDocs/documents/ENS - 2022-2023/économétrie/PROJET S2/CRCS14.sas')
 
-
-
-install.packages("foreign")
-
-library("foreign")
-
-data <- read.sas("/Users/jeanbaptistelagrangedupuis/Library/Mobile Documents/com~apple~CloudDocs/documents/ENS - 2022-2023/économétrie/PROJET S2/CRCS14.sas", to.data.frame = TRUE)
-
-
-lookup.xport("/Users/jeanbaptistelagrangedupuis/Desktop/CRCS14.sas")
-
+#à exécuter en premier pour installer les packages
 install.packages('psidR')
-library(psidR)
-
-build.psid(datadr = "~/data/PSID", small = TRUE)
-
-build.psid(datadr = "/Users/jeanbaptistelagrangedupuis/Desktop/testR/data/PSID", small = TRUE)
-
 install.packages("data.table")
 
+#Pour créer le data frame
 library(psidR)
 library(data.table)
 r = system.file(package="psidR")
 f = fread(file.path(r,"psid-lists","famvars.txt"))
 i = fread(file.path(r,"psid-lists","indvars.txt"))
-
-
-i
-
-f
-
-cwf <- read.xlsx("http://psidonline.isr.umich.edu/help/xyr/psid.xlsx")
-
-
 i = dcast(i[,list(year,name,variable)],year~name, value.var = "variable")
 f = dcast(f[,list(year,name,variable)],year~name, value.var = "variable")
-
-head(i)
-
-head(f)
-
 d = build.panel(datadir="~/projet-econometrie-ensps/data/PSID/",fam.vars=f,ind.vars=i, heads.only = TRUE,sample="SRC",design="all")
 
-individu <- d[d$year==2017]
 
 
 
