@@ -1,0 +1,39 @@
+% !Rnw weave = knitr
+
+\documentclass[a4paper,11 pt]{article}
+\usepackage{lmodern}
+\usepackage{textcomp}
+\usepackage[french]{babel}
+\usepackage{geometry}
+\geometry{top=1cm, bottom=1cm, left=1cm, right=1cm}
+
+\title{Titre provisoire}
+\author{Louis Bourges, Jean-Baptiste Lagrange-Dupuis et Luc Letonturier}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+Et ici on peut écrire ... et insérer des blocs de code qui s'éxécutent, avec le code et le résultat ui s'affichent
+
+<<>>=
+a <-  2+2
+a
+@
+
+ou juste le résultat : 
+
+<< echo=FALSE>>=
+b <-3+3
+b
+@
+
+ou totalement invisibles : 
+<<echo=FALSE, results="hide">>=
+c <- 4+4
+c
+@
+
+Et ensuite on peut citer les résultats : à première vue $\Sexpr{a} < \Sexpr{b}$ mais je crois que c'est \Sexpr{c} qui est le plus grand.
+\end{document}
