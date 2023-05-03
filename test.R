@@ -43,3 +43,9 @@ build.panel(fam.vars=famvars,datadir="~/projet-econometrie-ensps/data/PSID/")
 
 
 
+
+
+
+
+
+

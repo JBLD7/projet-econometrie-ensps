@@ -36,4 +36,6 @@ c
 @
 
 Et ensuite on peut citer les résultats : à première vue $\Sexpr{a} < \Sexpr{b}$ mais je crois que c'est \Sexpr{c} qui est le plus grand.
+
+
 \end{document}
