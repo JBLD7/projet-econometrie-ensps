@@ -17,7 +17,7 @@ d = build.panel(datadir="~/projet-econometrie-ensps/data/PSID/",fam.vars=f,ind.v
 #Pour récupérer des variables spécifiques 
 #Je mettrai le code plus tard.
 
-
+je fais un petit test !! 
 
 
 
