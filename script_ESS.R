@@ -1,12 +1,9 @@
 ###Essai avec la base de données de l'ESS
 library(readr)
-ESS7e02_2 <- read_csv("~/projet-econometrie-ensps/data_ESS/ESS7e02_2.csv")
+ESS7e02_2 <- read_csv("./data_ESS/ESS7e02_2.csv")
+#Si la ligne ci-dessus ne fonctionne pas, utiliser la commande : 
+#setwd("le-chemin-du-fichier-"projet-econometrie-ensps"-sur-votre-ordinateur")
+#puis réessayer les deux lignes de code !
 
 data <-  ESS7e02_2
-spec(data)
-
-which(is.na(data$hinctnta))
-
-
-
-unique(base[which(is.na(base$Taux)), c("An", "Pays")])
+mean(na.omit(data$hinctnta))
