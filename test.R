@@ -14,7 +14,7 @@ i = dcast(i[,list(year,name,variable)],year~name, value.var = "variable")
 f = dcast(f[,list(year,name,variable)],year~name, value.var = "variable")
 d = build.panel(datadir="~/projet-econometrie-ensps/data/PSID/",fam.vars=f,ind.vars=i, heads.only = TRUE,sample="SRC",design="all")
 
-<<<<<<< HEAD
+
 ###Pour récupérer des variables spécifiques 
 library(openxlsx)
 library(psidR)
@@ -40,12 +40,6 @@ famvars = data.frame(year=c(2003),age=head_age_var_name)
 build.panel(fam.vars=famvars,datadir="~/projet-econometrie-ensps/data/PSID/")
 #Je n'ai pas tout à fait bien compris comment ça marchait. Je mets la documentation du package dans les fichiers du projet. 
 
-=======
-#Pour récupérer des variables spécifiques 
-#Je mettrai le code plus tard.
-
-je fais un petit test !! 
->>>>>>> 08e6045d82c4db00a039c46d71f701ce33e78e95
 
 
 
