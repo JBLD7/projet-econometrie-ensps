@@ -24,17 +24,27 @@ sum(is.na(agregdata$ci22o002))
 sum(is.na(agregdata$ci22o236))
 sum(agregdata$ci22o236<0)
 sum(is.na(agregdata$partner))
+sum(is.na(agregdata$ci22o007))
+sum(agregdata$ci22o007==-9)
+
 
 
 #Suppression des NA
 agregdata <-  agregdata[!agregdata$netinc==-13,]
+agregdata <-  agregdata[!agregdata$netinc<=2,]
 agregdata <- agregdata[!is.na(agregdata$ci22o380),]
 agregdata <-  agregdata[!agregdata$ci22o380==-9,]
 agregdata <-  agregdata[!is.na(agregdata$ci22o002),]
 agregdata <-  agregdata[!is.na(agregdata$ci22o236),]
-agregdata <-  agregdata[!agregdata$ci22o236==-8,,]
+agregdata <-  agregdata[!agregdata$ci22o236<=2,]
+agregdata <-  agregdata[!agregdata$ci22o236==-8,]
+agregdata <-  agregdata[!agregdata$ci22o007==-9,] #How satisfied are you with the current economic situation in the Netherlands?
+agreg
 
 #taille du data frame (nbre observations)
+nrow(agregdata)
+
+
 
 ### Création de nouvelles variables agrégées
 
@@ -46,6 +56,9 @@ names(data)<-c("identifiant", "happiness", "age", "income", "abovemin", "partner
 lm1 <- lm(data$happiness ~ data$age + data$income + data$abovemin + data$partner)
 summary(lm1)
 
+
+sum(data$happiness<7)
+sum(data$happiness>=7)
 ###Tests d'hétéroscédasticité
 
 data$uhat <- lm1$residuals
@@ -58,8 +71,24 @@ ggplot(data = data, mapping = aes(x = yhat, y = uhat)) +
   geom_hline(yintercept = 0, col = 'red') +
   labs(y = 'Residuals', x = 'Fitted values')
 
+#Même graph avec en abscisses le niveau de bonheur
+library(ggplot2)
+ggplot(data = data, mapping = aes(x = happiness, y = uhat)) +
+  theme_bw() +
+  geom_point() +
+  geom_hline(yintercept = 0, col = 'red') +
+  labs(y = 'Residuals', x = 'Happiness')
+
 data$res2 <- data$uhat^2
 
+lm2 <-lm(data$res2 ~ data$age + data$income + data$abovemin + data$partner)
+summary(lm2)
+#
+
+library(lmtest)
+bptest(lm(data$res2 ~ data$age + data$income + data$abovemin + data$partner))
+#p-value<0,05 donc on ne rejette pas l'hypothèse nulle. on ne dispose pas de suffisament 
+#d'éléments pour affirmer qu'il y a de l'hétéroscédasticité dans le modèle
 
 
 
