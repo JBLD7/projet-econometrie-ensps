@@ -38,7 +38,7 @@ cwf = openxlsx::read.xlsx(system.file(package="psidR","psid-lists","psid.xlsx"))
 head_age_var_name <- getNamesPSID("ER17013", cwf, years=c(2003))
 famvars = data.frame(year=c(2003),age=head_age_var_name)
 build.panel(fam.vars=famvars,datadir="~/projet-econometrie-ensps/data/PSID/")
-#Je n'ai pas tout à fait bien compris comment ça marchait. Je mets la documentation du package dans les fichiers du projet. 
+#Je n'ai pas tout à fait bien compris comment ça marchait. Je mets la documentation du package dans les fichiers du projet. Mais peut-être qu'il vaut mieux essayer le liss. 
 
 
 
