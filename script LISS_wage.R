@@ -217,12 +217,19 @@ stat_de_test <- ((sum(p$residuals^2) - ( sum(p_1$residuals^2) + sum(p_2$residual
 stat_de_test
 
 ##On réessaye Chow
+data <- data[order(data$education),]
+sum(data$education<=16)
+hist(data$education)
+
 
 library(strucchange)
-sctest(data$experience ~ data$log_revenu, type="Chow", point=5)
+sctest(data$log_revenu ~ data$age + data$genre + data$heures + data$experience + data$nbenfants + data$education, type="Chow", point=704)
 
-dt1 <- data[data$education <=14,]
-dt2 <- data[data$education>14,]
+dt1 <- data[data$education <= 16,]
+dt2 <- data[data$education>16,]
+nrow(dt1)
+summary(dt1$education)
+summary(dt2$education)
 
 p_1 <-lm(log_revenu ~ age + genre + heures + experience + nbenfants + education, data = dt1)
 p_1
@@ -237,6 +244,13 @@ p <- lm(log_revenu ~ age + genre + heures + experience + nbenfants + education, 
 
 stat_de_test <- ((sum(p$residuals^2) - ( sum(p_1$residuals^2) + sum(p_2$residuals^2)))/2)/(( sum(p_1$residuals^2) + sum(p_2$residuals^2))/(1860 - 4))
 stat_de_test
+
+ggplot(data, aes(x = data$education, y = p$fitted.values)) + geom_point(col='steelblue', size=3)
+
+
+
+
+
 
 
 
