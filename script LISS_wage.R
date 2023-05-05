@@ -106,12 +106,12 @@ data$residuals1
 sum(data$residuals1)
 
 data$ln_resi2<-data$residuals1*data$residuals1
-ln_model_BP<-lm(ln_resi2 ~ age + genre + heures + experience + enfant + education, data)
+ln_model_BP<-lm(ln_resi2 ~ age + genre + heures + experience + enfant + education, data = data)
 summary(ln_model_BP) #la p-value étant très faible, on rejette l'hypothèse nulle d'homoscédasticité, donc on conclut à psce hétéroscédasticité
-nrow(data)
+
 
 library(lmtest)
-bptest(lm2) #idem, juste pour vérifier
+bptest(lm1, studentize=FALSE) #idem, juste pour vérifier
 
 
 #méthode de white
@@ -136,9 +136,85 @@ modele_robust3 <- lm_robust(data=data,log_revenu ~ age + genre + heures + experi
 summary(modele_robust3)
 
 #méthode des moindres carrés généralisée
-modele <- lm(data$log_revenu ~ data$age + data$genre + data$heures + data$experience + data$nbenfants + data$education)
-data$logresid2 <- log(residuals(modele)^2) # on ajoute la variable ln(e^2)
-modeleresid <- lm(data=data,logresid2 ~ age + genre + heures + experience + nbenfants + education) # on les régresse sur les x
-data$e2chap <- exp(modeleresid$fitted.values) # on calcule la variance prédite
-modele_mcqg <- lm(data=data,log_revenu ~ age + genre + heures + experience + nbenfants + education,weight=1/e2chap) # on pondère la régression par 1/variance
-summary(modele_mcqg)
+#modele <- lm(data$log_revenu ~ data$age + data$genre + data$heures + data$experience + data$nbenfants + data$education)
+#data$logresid2 <- log(residuals(modele)^2) # on ajoute la variable ln(e^2)
+#modeleresid <- lm(data=data,logresid2 ~ age + genre + heures + experience + nbenfants + education) # on les régresse sur les x
+#data$e2chap <- exp(modeleresid$fitted.values) # on calcule la variance prédite
+#modele_mcqg <- lm(data=data,log_revenu ~ age + genre + heures + experience + nbenfants + education,weight=1/e2chap) # on pondère la régression par 1/variance
+#summary(modele_mcqg)
+
+
+###On retient le modèle robuste :
+
+modele <- modele_robust3
+summary(modele)
+
+data$uhat <- modele$res_var
+data$yhat <- modele$fitted.values
+
+ggplot(data = data, mapping = aes(x = yhat, y = uhat)) +
+  theme_bw() +
+  geom_point() +
+  geom_hline(yintercept = 0, col = 'red') +
+  labs(y = 'Residuals', x = 'Heures')
+
+
+
+#Wald
+data$enfant <- as.factor(data$nbenfants)
+data$enfant <- as.numeric(data$nbenfants)
+data$penfant <- ifelse(data$nbenfants>0, 1, 0)
+summary(data$enfant)
+summary(data$heures)
+data$tpsfaible <- ifelse(data$heures<26, 1, 0)
+data$tpsenfant <- data$tpsfaible*data$penfant
+data$F_tps <- data$genre*data$tpsfaible
+data$F_penfant <- data$penfant*data$genre
+lm3 <- lm(data$log_revenu ~ data$genre + data$penfant + data$tpsfaible + data$F_tps + data$F_penfant + data$tpsenfant)
+summary(lm3)
+M <- matrix(c(0, 1, 0, 0, 1, 0, 0,
+              0, 1, 0, 0, 0, 1, 0), nrow = 2, byrow = TRUE)
+wald.test(b = coef(lm3), Sigma = vcov(lm3), L = M)
+summary(lm3)
+
+hist(data$enfant)
+
+summary(data$education)
+
+exp(8.22)
+
+mean(data$revenu)
+
+
+#Chow
+
+library(ggplot2)
+
+
+ggplot(data, aes(x = data$experience, y = data$log_revenu)) + geom_point(col='steelblue', size=3)
+
+n_exp <- length(data$experience)
+hist(data$experience)
+
+library(strucchange)
+sctest(data$experience ~ data$log_revenu, type="Chow", point=5)
+
+dt1 <- data[data$age <=25,]
+dt2 <- data[data$age>25,]
+
+p_1 <-lm(dt1$log_revenu ~ dt1$experience, data = dt1)
+p_1
+
+p_2 <-lm(dt2$log_revenu ~ dt2$experience, data = dt2)
+p_2
+
+summary(p_1)
+summary(p_2)
+
+p <- lm(data$log_revenu ~ data$experience, data = data)
+
+stat_de_test <- ((sum(p$residuals^2) - ( sum(p_1$residuals^2) + sum(p_2$residuals^2)))/2)/(( sum(p_1$residuals^2) + sum(p_2$residuals^2))/(1860 - 4))
+stat_de_test
+
+
+
