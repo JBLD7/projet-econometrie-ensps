@@ -216,5 +216,27 @@ p <- lm(data$log_revenu ~ data$experience, data = data)
 stat_de_test <- ((sum(p$residuals^2) - ( sum(p_1$residuals^2) + sum(p_2$residuals^2)))/2)/(( sum(p_1$residuals^2) + sum(p_2$residuals^2))/(1860 - 4))
 stat_de_test
 
+##On réessaye Chow
+
+library(strucchange)
+sctest(data$experience ~ data$log_revenu, type="Chow", point=5)
+
+dt1 <- data[data$education <=14,]
+dt2 <- data[data$education>14,]
+
+p_1 <-lm(log_revenu ~ age + genre + heures + experience + nbenfants + education, data = dt1)
+p_1
+
+p_2 <-lm(log_revenu ~ age + genre + heures + experience + nbenfants + education, data = dt2)
+p_2
+
+summary(p_1)
+summary(p_2)
+
+p <- lm(log_revenu ~ age + genre + heures + experience + nbenfants + education, data = data)
+
+stat_de_test <- ((sum(p$residuals^2) - ( sum(p_1$residuals^2) + sum(p_2$residuals^2)))/2)/(( sum(p_1$residuals^2) + sum(p_2$residuals^2))/(1860 - 4))
+stat_de_test
+
 
 
