@@ -13,15 +13,12 @@ agregdata <- merge(background, school, by="nomem_encr" )
 ###Gestion des NA
 
 #détection
-sum(is.na(agregdata$nettoink))
-agregdata <- agregdata[!is.na(agregdata$brutoink),]
-agregdata <- agregdata[!is.na(agregdata$netinc),]
-sum(agregdata$nettoink<=10)
-sum(agregdata$netinc<=10)
-agregdata <- agregdata[!agregdata$brutoink<=10,]
-agregdata <- agregdata[!agregdata$netinc<=10,]
+nrow(agregdata)
+
 
 agregdata <-  agregdata[!agregdata$cw22o005==28,]#suppression de la catégorie "autre"
+nrow(agregdata)
+sum(is.na(agregdata$cw22o005))
 #aucun na à priori
 
 ###Pré-traitement des données et réécriture des variables
@@ -37,32 +34,32 @@ agregdata$cw22o005 <- ifelse(agregdata$cw22o005==100|agregdata$cw22o005==200, 0,
                                                                        ifelse(agregdata$cw22o005==1900|agregdata$cw22o005==2000|agregdata$cw22o005==2100|agregdata$cw22o005==2200|agregdata$cw22o005==2300|agregdata$cw22o005==2400|agregdata$cw22o005==2500, 17, 
                                                                               ifelse(agregdata$cw22o005==2600, 19,
                                                                                      ifelse(agregdata$cw22o005==2600, 22,-9))))))))))#post-tertiary (3 ans mais c'est aribitraire) => 18+3=21 ans 
-
-
-sum(agregdata$cw22o005==400)
-hist(agregdata$cw22o008)
-
+nrow(agregdata)
+sum(agregdata$cw22o005==-9)
+agregdata <-  agregdata[!agregdata$cw22o005==-9,]
+hist(agregdata$cw22o005)
+nrow(agregdata)
 ###Création d'une table avec les données pertinentes
 
 
 
 
-data<-data.frame(agregdata$nomem_encr,agregdata$leeftijd,agregdata$geslacht,agregdata$brutoink, agregdata$netinc,agregdata$cw22o127,agregdata$cw22o134,agregdata$cw22o439, agregdata$cw22o008, agregdata$aantalki, agregdata$cw22o139)
-names(data)<-c("identite", "age", "genre", "revenu_brut", "revenu_net", "heures", "experience", "enfant","educ", "nbenfants", "soiree")
+data<-data.frame(agregdata$nomem_encr,agregdata$leeftijd,agregdata$geslacht,agregdata$brutoink,agregdata$cw22o127,agregdata$cw22o134,agregdata$cw22o439, agregdata$cw22o005, agregdata$aantalki, agregdata$cw22o139)
+names(data)<-c("identite", "age", "genre", "revenu", "heures", "experience", "enfant","education", "nbenfants", "soiree")
 
 nrow(data)
-sum(is.na(data$soiree))
+sum(is.na(data$education))
 sum(data$soiree==5)
 
 
-data <-  data[!data$revenu_net<=-10,]
-data <-  data[!data$revenu_brut<=-10,]
+data <-  data[!data$revenu<=0,]
 data <- data[!is.na(data$heures),]
 data <- data[!is.na(data$experience),]
+data <- data[!is.na(data$education),]
 #data <- data[!is.na(data$soiree),]
 #data <- data[!is.na(data$enfant),]
-data <- data[!is.na(data$educ),]
 data <-  data[!data$experience==999,]
+data <-  data[!data$education==-9,]
 data <-  data[!data$heures==999,]
 data <-  data[!data$genre==3,]
 
@@ -70,8 +67,7 @@ data <-  data[!data$genre==3,]
 
 data$genre <- ifelse(data$genre==1, 0, 1)
 #data$enfant <- ifelse(data$enfant==1, 1, 0)
-data$log_revenu_net <- log(data$revenu_net)
-data$log_revenu_brut <- log(data$revenu_brut)
+data$log_revenu <- log(data$revenu)
 
 
 data$experience <- 2022 - data$experience
@@ -80,26 +76,69 @@ data$experience <- 2022 - data$experience
 
 
 
-#lm1 <- lm(data$log_revenu_net ~ data$age + data$genre + data$heures + data$experience + data$enfant)
+
+lm1 <- lm(data$log_revenu ~ data$age + data$genre + data$heures + data$experience + data$nbenfants + data$education)
 summary(lm1)
 
-#lm2 <- lm(data$revenu_net ~ data$age + data$genre + data$heures + data$experience + data$enfant)
-summary(lm2)
-
-#lm3 <- lm(data$log_revenu_net ~ data$age + data$genre + data$heures + data$experience + data$enfant + data$educ)
-summary(lm3)
-
-lm4 <- lm(data$log_revenu_net ~ data$age + data$genre + data$heures + data$experience + data$nbenfants + data$educ)
-summary(lm4) # Où on a changé la variable enfants ! 
-
-
-lm5 <- lm(data$log_revenu_net ~ data$age + data$genre + data$heures + data$experience + data$nbenfants + data$educ)
-summary(lm5)
-
-lm6 <- lm(data$log_revenu_brut ~ data$age + data$genre + data$heures + data$experience + data$nbenfants + data$educ)
-summary(lm6)
-
-#lm7 <- lm(data$log_revenu_brut ~ data$age + data$genre + data$heures + data$experience + data$nbenfants + data$educ + data$soiree)
+#lm7 <- lm(data$log_revenu ~ data$age + data$genre + data$heures + data$experience + data$nbenfants + data$education + data$soiree)
 #summary(lm7)#où l'on prend en compte si les enquêtés travaillent régulièrement tard le soir (18-minuit) ou non
 
 nrow(data)
+sum(data$education==0)
+hist(data$revenu)
+sum(data$revenu<0)
+
+
+#Vérification hétéroscédasticité :
+
+data$uhat <- lm1$residuals
+data$yhat <- lm1$fitted.value
+
+library(ggplot2)
+ggplot(data = data, mapping = aes(x = yhat, y = uhat)) +
+  theme_bw() +
+  geom_point() +
+  geom_hline(yintercept = 0, col = 'red') +
+  labs(y = 'Residuals', x = 'Fitted values')
+
+data$residuals1<-lm1$residuals
+data$residuals1
+sum(data$residuals1)
+
+data$ln_resi2<-data$residuals1*data$residuals1
+ln_model_BP<-lm(ln_resi2 ~ age + genre + heures + experience + enfant + education, data)
+summary(ln_model_BP) #la p-value étant très faible, on rejette l'hypothèse nulle d'homoscédasticité, donc on conclut à psce hétéroscédasticité
+nrow(data)
+
+library(lmtest)
+bptest(lm2) #idem, juste pour vérifier
+
+
+#méthode de white
+
+modele <- lm(data$log_revenu ~ data$age + data$genre + data$heures + data$experience + data$nbenfants + data$education)
+smodele <- summary(modele)
+library(lmtest)
+library(sandwich)
+
+modele_robust <- coeftest(modele, vcov = vcovHC(modele, type = "HC1"))
+modele_robust
+
+library(lmtest)
+library(car)
+modele_robust2 <- coeftest(modele, vcov = hccm(modele, type = "hc1"))
+modele_robust2
+confint(modele_robust)
+
+#méthode de white (méthode 2, paquet + récent)
+library(estimatr)
+modele_robust3 <- lm_robust(data=data,log_revenu ~ age + genre + heures + experience + nbenfants + education, se_type = "HC1")
+summary(modele_robust3)
+
+#méthode des moindres carrés généralisée
+modele <- lm(data$log_revenu ~ data$age + data$genre + data$heures + data$experience + data$nbenfants + data$education)
+data$logresid2 <- log(residuals(modele)^2) # on ajoute la variable ln(e^2)
+modeleresid <- lm(data=data,logresid2 ~ age + genre + heures + experience + nbenfants + education) # on les régresse sur les x
+data$e2chap <- exp(modeleresid$fitted.values) # on calcule la variance prédite
+modele_mcqg <- lm(data=data,log_revenu ~ age + genre + heures + experience + nbenfants + education,weight=1/e2chap) # on pondère la régression par 1/variance
+summary(modele_mcqg)
