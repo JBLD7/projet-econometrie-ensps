@@ -40,8 +40,8 @@ agregdata$educ <- ifelse(agregdata$educ==800|agregdata$educ==900, 0,
                                                   #1st option : MBO (entre 1 et 4 ans, après VMBO, HAVO ou VWO) => 12.75 + 2.5 = 15.25 a.e. : "mbo (intermediate vocational education, US: junior college)"
                                                          ifelse(agregdata$educ==500, 16.75,
                                                           #2nd option : HBO (4 ans, après VMBO, HAVO ou VWO) => 12.75+4=16.75 a.e. : "hbo (higher vocational education, US: college)"
-                                                                ifelse(agregdata$educ==600, 18, -9)))))))
-                                                                #3rd option : WO (3 ans, après 1ere année HBO (13.75 a.e.) ou après VWO (14 a.e.), licence) => 14+4=17 a.e. : "wo (university)"
+                                                                ifelse(agregdata$educ==600, 17, -9)))))))
+                                                                #3rd option : WO (3 ans, après 1ere année HBO (13.75 a.e.) ou après VWO (14 a.e.), licence) => 14+3=17 a.e. : "wo (university)"
 nrow(agregdata)
 sum(agregdata$educ==-9)
 agregdata <-  agregdata[!agregdata$educ==-9,]
@@ -55,17 +55,16 @@ sum(agregdata$cw22o005==26) #nombre de titulaires d'un master (au maximum)
 sum(agregdata$cw22o005==25) #nombre de titulaires d'une licence (au maximum)
 sum(agregdata$cw22o005==27)+sum(agregdata$cw22o005==26)+sum(agregdata$cw22o005==25) #nombre de diplômés du supérieur (au moins licence), selon cw22o005
 sum(agregdata$educ==18)
-sum((agregdata$cw22o005==27|agregdata$cw22o005==26|agregdata$cw22o005==25)&agregdata$educ!=18)#nombre d'observations "bizarres"
-sum((agregdata$cw22o005==27|agregdata$cw22o005==26|agregdata$cw22o005==25)&agregdata$educ!=18)#nombre d'observations "bizarres"
+sum((agregdata$cw22o005==27|agregdata$cw22o005==26|agregdata$cw22o005==25)&agregdata$educ!=17)#nombre d'observations "bizarres"
 #On considère que les réponses à la question cw22o005 sont plus fiables car plus précises.
 
 #On ajoute les études supérieures à educ :
 
-agregdata$educ <- ifelse(agregdata$cw22o005==25, 18,
+agregdata$educ <- ifelse(agregdata$cw22o005==25, 17,
                   #niveau licence => 18 ans d'études
-                         ifelse(agregdata$cw22o005==26, 20,
-                         #niveau master, le master dure 1, 2 ou 3 ans => 18 + 2 = 20 a.e.
-                              ifelse(agregdata$cw22o005==27, 23.5, agregdata$educ))) #après le master, un doctorat dure 3 à 4 ans => 20 . 3.5 = 23.5 a.e.
+                         ifelse(agregdata$cw22o005==26, 19,
+                         #niveau master, le master dure 1, 2 ou 3 ans => 17 + 2 = 19 a.e.
+                              ifelse(agregdata$cw22o005==27, 22.5, agregdata$educ))) #après le master, un doctorat dure 3 à 4 ans => 19 + 3.5 = 22.5 a.e.
 
 
 ggplot(agregdata, aes(x=factor(agregdata$educ)))+
