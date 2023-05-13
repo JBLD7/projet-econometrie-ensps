@@ -80,11 +80,11 @@ ggplot(agregdata, aes(x=factor(agregdata$educ)))+
 
 
 
-data<-data.frame(agregdata$nomem_encr,agregdata$leeftijd,agregdata$geslacht,agregdata$brutoink,agregdata$cw22o127,agregdata$cw22o134,agregdata$cw22o439, agregdata$educ, agregdata$aantalki)
-names(data)<-c("identite", "age", "genre", "revenu", "heures", "experience", "enfant","education", "nbenfants")
+data<-data.frame(agregdata$nomem_encr,agregdata$leeftijd,agregdata$geslacht,agregdata$brutoink,agregdata$cw22o127,agregdata$cw22o134, agregdata$educ, agregdata$aantalki)
+names(data)<-c("identite", "age", "genre", "revenu", "heures", "experience","education", "nbenfants")
 
 nrow(data)
-sum(is.na(data$education))
+sum(is.na(data$nbenfants))
 
 
 
@@ -92,7 +92,6 @@ data <-  data[!data$revenu<=0,]
 data <- data[!is.na(data$heures),]
 data <- data[!is.na(data$experience),]
 data <- data[!is.na(data$education),]
-#data <- data[!is.na(data$enfant),]
 data <-  data[!data$experience==999,]
 data <-  data[!data$education==-9,]
 data <-  data[!data$heures==999,]
@@ -101,7 +100,6 @@ data <-  data[!data$genre==3,]
 ###Réecriture des variables : 
 
 data$genre <- ifelse(data$genre==1, 0, 1)
-#data$enfant <- ifelse(data$enfant==1, 1, 0)
 data$log_revenu <- log(data$revenu)
 
 
@@ -141,7 +139,7 @@ data$residuals1
 sum(data$residuals1)
 
 data$ln_resi2<-data$residuals1*data$residuals1
-ln_model_BP<-lm(ln_resi2 ~ age + genre + heures + experience + enfant + education, data = data)
+ln_model_BP<-lm(ln_resi2 ~ age + genre + heures + experience + nbenfants + education, data = data)
 summary(ln_model_BP) #la p-value étant très faible, on rejette l'hypothèse nulle d'homoscédasticité, donc on conclut à psce hétéroscédasticité
 
 
@@ -198,10 +196,9 @@ sum(modele$residuals) #On a bien une somme des résidus nulle
 #Wald
 library(lmtest)
 library(aod)
-data$enfant <- as.factor(data$nbenfants)
-data$enfant <- as.numeric(data$nbenfants)
+data$nbenfants <- as.numeric(data$nbenfants)
 data$penfant <- ifelse(data$nbenfants>0, 1, 0)
-summary(data$enfant)
+summary(data$nbenfants)
 summary(data$heures)
 data$tpsfaible <- ifelse(data$heures<26, 1, 0)
 data$tpsenfant <- data$tpsfaible*data$penfant
@@ -214,7 +211,7 @@ M <- matrix(c(0, 1, 0, 0, 1, 0, 0,
 wald.test(b = coef(lm3), Sigma = vcov(lm3), L = M)
 summary(lm3)
 
-hist(data$enfant)
+hist(data$nbenfants)
 
 summary(data$education)
 
