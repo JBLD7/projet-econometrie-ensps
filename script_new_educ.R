@@ -80,19 +80,18 @@ ggplot(agregdata, aes(x=factor(agregdata$educ)))+
 
 
 
-data<-data.frame(agregdata$nomem_encr,agregdata$leeftijd,agregdata$geslacht,agregdata$brutoink,agregdata$cw22o127,agregdata$cw22o134,agregdata$cw22o439, agregdata$educ, agregdata$aantalki, agregdata$cw22o139)
-names(data)<-c("identite", "age", "genre", "revenu", "heures", "experience", "enfant","education", "nbenfants", "soiree")
+data<-data.frame(agregdata$nomem_encr,agregdata$leeftijd,agregdata$geslacht,agregdata$brutoink,agregdata$cw22o127,agregdata$cw22o134,agregdata$cw22o439, agregdata$educ, agregdata$aantalki)
+names(data)<-c("identite", "age", "genre", "revenu", "heures", "experience", "enfant","education", "nbenfants")
 
 nrow(data)
 sum(is.na(data$education))
-sum(data$soiree==5)
+
 
 
 data <-  data[!data$revenu<=0,]
 data <- data[!is.na(data$heures),]
 data <- data[!is.na(data$experience),]
 data <- data[!is.na(data$education),]
-#data <- data[!is.na(data$soiree),]
 #data <- data[!is.na(data$enfant),]
 data <-  data[!data$experience==999,]
 data <-  data[!data$education==-9,]
@@ -108,16 +107,16 @@ data$log_revenu <- log(data$revenu)
 
 data$experience <- 2022 - data$experience
 
-#data$soiree <- ifelse(data$soiree>2, 1, 0)
 
-
+data$education_2 <- data$education^2
 
 
 lm1 <- lm(data$log_revenu ~ data$age + data$genre + data$heures + data$experience + data$nbenfants + data$education)
 summary(lm1)
 
-#lm7 <- lm(data$log_revenu ~ data$age + data$genre + data$heures + data$experience + data$nbenfants + data$education + data$soiree)
-#summary(lm7)#où l'on prend en compte si les enquêtés travaillent régulièrement tard le soir (18-minuit) ou non
+lm2 <- lm(data$log_revenu ~ data$age + data$genre + data$heures + data$experience + data$nbenfants + data$education_2)
+summary(lm2)
+
 
 nrow(data)
 sum(data$education==0)
