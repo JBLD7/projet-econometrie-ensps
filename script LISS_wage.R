@@ -161,6 +161,8 @@ ggplot(data = data, mapping = aes(x = yhat, y = uhat)) +
 
 
 #Wald
+library(lmtest)
+library(aod)
 data$enfant <- as.factor(data$nbenfants)
 data$enfant <- as.numeric(data$nbenfants)
 data$penfant <- ifelse(data$nbenfants>0, 1, 0)
@@ -222,8 +224,7 @@ sum(data$education<=16)
 hist(data$education)
 
 
-library(strucchange)
-sctest(log_revenu ~ age + genre + heures + experience + nbenfants + education, type="Chow", point=704, data=data[order(data$education),])
+#Chow méthode manuelle
 
 dt1 <- data[data$education <= 16,]
 dt2 <- data[data$education>16,]
@@ -250,10 +251,11 @@ ggplot(data, aes(x = data$education, y = p$fitted.values)) + geom_point(col='ste
 sum(data$education>16)
 nrow(data)
 
+#Chow méthode automatique (vérification)
 
 
-
-
+library(strucchange)
+sctest(log_revenu ~ age + genre + heures + experience + nbenfants + education, type="Chow", point=704, data=data[order(data$education),])
 
 
 
