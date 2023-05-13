@@ -206,10 +206,20 @@ data$F_tps <- data$genre*data$tpsfaible
 data$F_penfant <- data$penfant*data$genre
 lm3 <- lm(data$log_revenu ~ data$genre + data$penfant + data$tpsfaible + data$F_tps + data$F_penfant + data$tpsenfant)
 summary(lm3)
-M <- matrix(c(0, 1, 0, 0, 1, 0, 0,
-              0, 1, 0, 0, 0, 1, 0), nrow = 2, byrow = TRUE)
+#Sur la régression on observe un effet important des variables croisées (toutes jouant négativement) : renforcement des effets lorsque 
+#l'on appartient à plusieurs catégories (ex : femme avec enfants en bas âge ou femme à tps partiel)
+
+#On commence par tester l'hypothèse composite : "au moins une des deux variables croisées liées au genre est significative"
+M <- matrix(c(0, 0, 0, 0, 1, 0, 0,
+              0, 0, 0, 0, 0, 1, 0), nrow = 2, byrow = TRUE)
 wald.test(b = coef(lm3), Sigma = vcov(lm3), L = M)
-summary(lm3)
+#La p-value étant très faible, on peut en conclure que l'un des variables au moins est significative 
+
+#On veut maintenant tester si l'effet d'avoir un enfant (au moins) est nul pour les personnes à temps partiel et les femmes à temps partiel
+M <- matrix(c(0, 0, 1, 0, 1, 1, 0,
+              0, 0, 1, 1, 0, 0, 0), nrow = 2, byrow = TRUE)
+wald.test(b = coef(lm3), Sigma = vcov(lm3), L = M)
+#La p-value étant très faible, il y a une différence significative, donc on rejette H_0 : l'effet n'est pas nul
 
 hist(data$nbenfants)
 
@@ -289,5 +299,5 @@ nrow(data)
 library(strucchange)
 sctest(log_revenu ~ age + genre + heures + experience + nbenfants + education, type="Chow", point=704, data=data[order(data$education),])
 
-
+nrow(data)
 
