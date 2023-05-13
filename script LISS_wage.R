@@ -223,7 +223,7 @@ hist(data$education)
 
 
 library(strucchange)
-sctest(data$log_revenu ~ data$age + data$genre + data$heures + data$experience + data$nbenfants + data$education, type="Chow", point=704)
+sctest(log_revenu ~ age + genre + heures + experience + nbenfants + education, type="Chow", point=704, data=data[order(data$education),])
 
 dt1 <- data[data$education <= 16,]
 dt2 <- data[data$education>16,]
@@ -242,10 +242,13 @@ summary(p_2)
 
 p <- lm(log_revenu ~ age + genre + heures + experience + nbenfants + education, data = data)
 
-stat_de_test <- ((sum(p$residuals^2) - ( sum(p_1$residuals^2) + sum(p_2$residuals^2)))/2)/(( sum(p_1$residuals^2) + sum(p_2$residuals^2))/(1860 - 4))
+stat_de_test <- ((sum(p$residuals^2) - ( sum(p_1$residuals^2) + sum(p_2$residuals^2)))/7)/(( sum(p_1$residuals^2) + sum(p_2$residuals^2))/(1855 - 14))
 stat_de_test
 
 ggplot(data, aes(x = data$education, y = p$fitted.values)) + geom_point(col='steelblue', size=3)
+
+sum(data$education>16)
+nrow(data)
 
 
 
