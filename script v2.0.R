@@ -1,5 +1,6 @@
 
-## ---- Import-bases-données
+## Import des bases de données 
+
 setwd("~/projet-econometrie-ensps/")
 library(readr)
 library(ggplot2)
@@ -10,7 +11,6 @@ background<-read_delim("data_LISS/avars_202207_EN_1.0p.csv", delim = ";", escape
 
 agregdata <- merge(background, school, by="nomem_encr" )
 
-## ---- Section 2
 ###Gestion des NA
 
 #détection
