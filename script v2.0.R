@@ -188,10 +188,10 @@ data$uhat <- modele$res_var
 data$yhat <- modele$fitted.values
 
 ggplot(data = data, mapping = aes(x = yhat, y = uhat)) +
-  theme_bw() +
-  geom_point() +
-  geom_hline(yintercept = 0, col = 'red') +
-  labs(y = 'Residuals', x = 'Log_revenu')
+  theme_minimal(base_size = 22) +
+  geom_point(col = 'steelblue') +
+  geom_hline(yintercept = 0, col = 'steelblue') +
+  labs(y = 'Residus', x = 'Logarithme du revenu brut')
 
 sum(modele$residuals) #On a bien une somme des résidus nulle
 
@@ -308,7 +308,7 @@ summary(lm(log_revenu ~ pred2 + genre + heures + nbenfants + education, data = d
 # Que l'on introduise ou non d'autres variables 
 # de contrôle, l'effet de l'augmentation 
 # d'un an de l'expérience d'un individu sur
-# le revenu par tête est réel 
+# le log du revenu est réel 
 # (+1,3 % environ pour la première spécification,
 # +2 % dans la seconde)
 #tandis que cet effet était de 0,3% dans la régression initiale (lm1)

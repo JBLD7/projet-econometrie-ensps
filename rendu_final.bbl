@@ -1,0 +1,85 @@
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 3.2 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated by
+% biber as required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+
+\refsection{0}
+  \datalist[entry]{nty/global//global/global}
+    \entry{becker1964}{article}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=72e0824c9fba8f7f957b80cb8dbe85d2}{%
+           family={Becker},
+           familyi={B\bibinitperiod},
+           given={Gary\bibnamedelima S.},
+           giveni={G\bibinitperiod\bibinitdelim S\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{72e0824c9fba8f7f957b80cb8dbe85d2}
+      \strng{fullhash}{72e0824c9fba8f7f957b80cb8dbe85d2}
+      \strng{bibnamehash}{72e0824c9fba8f7f957b80cb8dbe85d2}
+      \strng{authorbibnamehash}{72e0824c9fba8f7f957b80cb8dbe85d2}
+      \strng{authornamehash}{72e0824c9fba8f7f957b80cb8dbe85d2}
+      \strng{authorfullhash}{72e0824c9fba8f7f957b80cb8dbe85d2}
+      \field{sortinit}{B}
+      \field{sortinithash}{d7095fff47cda75ca2589920aae98399}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Chicago: University of Press}
+      \field{number}{6}
+      \field{title}{Human capital: a theoretical and empirical analysis, with special reference to education}
+      \field{volume}{19}
+      \field{year}{1964}
+      \field{dateera}{ce}
+      \field{pages}{4}
+      \range{pages}{1}
+    \endentry
+    \entry{mincer1974}{article}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=acc439dff0bb381ea083555637e18efa}{%
+           family={Mincer},
+           familyi={M\bibinitperiod},
+           given={Jacob},
+           giveni={J\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{publisher}{1}{%
+        {ERIC}%
+      }
+      \strng{namehash}{acc439dff0bb381ea083555637e18efa}
+      \strng{fullhash}{acc439dff0bb381ea083555637e18efa}
+      \strng{bibnamehash}{acc439dff0bb381ea083555637e18efa}
+      \strng{authorbibnamehash}{acc439dff0bb381ea083555637e18efa}
+      \strng{authornamehash}{acc439dff0bb381ea083555637e18efa}
+      \strng{authorfullhash}{acc439dff0bb381ea083555637e18efa}
+      \field{sortinit}{M}
+      \field{sortinithash}{4625c616857f13d17ce56f7d4f97d451}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Human Behavior \& Social Institutions}
+      \field{number}{2}
+      \field{title}{Schooling, {{Experience}}, and {{Earnings}}.}
+      \field{year}{1974}
+      \field{dateera}{ce}
+    \endentry
+  \enddatalist
+\endrefsection
+\endinput
+

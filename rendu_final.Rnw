@@ -5,40 +5,54 @@
 \usepackage{lmodern}
 \usepackage{textcomp}
 \usepackage[french]{babel}
-\usepackage{geometry}
-\geometry{top=1cm, bottom=1cm, left=1cm, right=1cm}
 \usepackage{graphicx}
+\usepackage{geometry}
+\geometry{top=2cm, bottom=2cm}
+\usepackage{hyperref}
+\hypersetup{pdfborder=0 0 0}
 \usepackage{epstopdf}
 \usepackage{booktabs}
 \usepackage[skip=0.5\baselineskip]{caption}
+\usepackage[backend=biber, isbn=false, doi=false, url=false, eprint=false, citestyle=ext-authoryear, maxnames=5, hyperref=true]{biblatex}
+\DeclareOuterCiteDelims{parencite}{\bibopenbracket}{\bibclosebracket}
+\usepackage[french=quotes, csdisplay=true]{csquotes}
 
 \epstopdfDeclareGraphicsRule{.gif}{png}{.png}{convert gif:#1 png:\OutputFile}
 \AppendGraphicsExtensions{.gif}
 \usepackage{listings}
 \usepackage{inconsolata}
 
-<<echo=FALSE>>=
-library(knitr)
-hook_output = knit_hooks$get('output')
-knit_hooks$set(output = function(x, options) {
-  # this hook is used only when the linewidth option is not NULL
-  if (!is.null(n <- options$linewidth)) {
-    x = xfun::split_lines(x)
-    # any lines wider than n should be wrapped
-    if (any(nchar(x) > n)) x = strwrap(x, width = n)
-    x = paste(x, collapse = '\n')
-  }
-  hook_output(x, options)
-})
-@
+\addbibresource{Econometrie.bib}
 
-\title{Titre provisoire}
-\author{Louis Bourges, Jean-Baptiste Lagrange-Dupuis et Luc Letonturier}
-\date{\today}
+\title{Les déterminants du salaire au Pays-Bas\\
+\vspace{0,5cm}
+{\normalsize Projet d'économétrie --- Département de Sciences Humaines et Sociales\\
+\vspace{0,5cm}
+École normale supérieure Paris-Saclay}}
+\author{\normalsize Louis Bourges, Jean-Baptiste Lagrange-Dupuis et Luc Letonturier}
+\date{\normalsize\today}
 
 \begin{document}
 
 \maketitle
+
+\section*{Introduction}
+
+Depuis Becker et sa théorie du capital humain en 1964, les travaux économiques visant à expliquer les différences de revenu entre les individus se sont multipliées. Becker a théorisé l’existence d’un calcul coût-avantage microéconomique, qui conduit les individus à arbitrer entre le coût d’une année supplémentaire d’études et le gain espéré à long terme \parencite{becker1964}. Mincer, une décennie plus tard, a enrichi cette approche en incluant l’expérience accumulée au cours des années de travail dans le capital humain \parencite{mincer1974}[a].
+
+Dans notre étude, nous tenterons de mesurer les effets de ces variables mais aussi d’autres paramètres, à l’instar du genre, de la présence d’enfants, mais aussi des heures travaillées ou de l’âge. Nous nous baserons sur deux enquêtes du LISS\footnote{\textit{Longitudinal Internet studies for the Social Sciences}, les questionnaires sont administrées par Centerdata} menées aux Pays-Bas respectivement en mai 2022 et en septembre 2022. Il s’agira, après une régression classique permettant de comprendre l’influence des différentes variables, de tester la présence d’hétéroscédasticité dans le modèle et, le cas échéant, de la corriger ; de mener un test de Chow pour tenter d'identifier d'éventuels effets de “paliers” quant au lien entre salaire et éducation ainsi que de discuter de la présence d’endogénéité dans le modèle et des moyens à notre disposition pour la corriger. Nous replacerons notre travail dans le contexte de la littérature existante et discuterons aussi de ses limites.
+
+<<setup, eval= TRUE, include= FALSE, cache= FALSE, echo= FALSE>>=
+system (paste ("biber", sub ("\\.Rnw$", "", current_input())))
+@
+
+\section{Présentation du modèle et de ses limites}
+
+Il faudra ici présenter le modèle. 
+
+\section{Résultats principaux}
+
+\section{Analyse et mise en perspective des résultats}
 
 Et ici on peut écrire ... et insérer des blocs de code qui s'éxécutent, avec le code et le résultat qui s'affichent
 
@@ -116,7 +130,6 @@ sum(agregdata$educ==-9)
 agregdata <-  agregdata[!agregdata$educ==-9,]
 nrow(agregdata)
 
-
 #Puis, pour distinguer entre licence, master et doctorat, on s'appuie sur la variable cw22o005 :
 sum(agregdata$cw22o005==27) #nombre de titulaires d'un PhD
 sum(agregdata$cw22o005==26) #nombre de titulaires d'un master (au maximum)
@@ -125,7 +138,6 @@ sum(agregdata$cw22o005==27)+sum(agregdata$cw22o005==26)+sum(agregdata$cw22o005==
 sum(agregdata$educ==18)
 sum((agregdata$cw22o005==27|agregdata$cw22o005==26|agregdata$cw22o005==25)&agregdata$educ!=17)#nombre d'observations "bizarres"
 #On considère que les réponses à la question cw22o005 sont plus fiables car plus précises.
-
 
 @
 Un petit graphique : 
@@ -137,7 +149,6 @@ agregdata$educ2 <- ifelse(agregdata$cw22o005==25, 17,
                          ifelse(agregdata$cw22o005==26, 19,
                                 #niveau master, le master dure 1, 2 ou 3 ans => 17 + 2 = 19 a.e.
                                 ifelse(agregdata$cw22o005==27, 22.5, agregdata$educ))) #après le master, un doctorat dure 3 à 4 ans => 19 + 3.5 = 22.5 a.e.
-
 
 g <- ggplot(agregdata, aes(x=factor(agregdata$educ2)), id=id, transition=TRUE)+
   geom_bar(fill="steelblue")+
@@ -163,7 +174,6 @@ nrow(data)
 sum(is.na(data$nbenfants))
 
 
-
 data <-  data[!data$revenu<=0,]
 data <- data[!is.na(data$heures),]
 data <- data[!is.na(data$experience),]
@@ -178,23 +188,17 @@ data <-  data[!data$genre==3,]
 data$genre <- ifelse(data$genre==1, 0, 1)
 data$log_revenu <- log(data$revenu)
 
-
 data$experience <- 2022 - data$experience
-
 
 lm1 <- lm(data$log_revenu ~ data$age + data$genre + data$heures + data$experience + data$nbenfants + data$education)
 
 @
 
-
 << echo=FALSE, results='asis'>>=
 print(xtable(summary(lm1), caption="Tableau des résidus", label="tb:lm1"), booktabs=TRUE, caption.placement="top")
 @
 
-Ici c'est l'annexe 
-
-<<ref.label=knitr::all_labels()>>=
-
-@
-
+\printbibliography
 \end{document}
+
+[a]c'est un test de commentaire
