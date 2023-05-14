@@ -1,15 +1,16 @@
+
+## ---- Import-bases-données
 setwd("~/projet-econometrie-ensps/")
-
-###Importation des bases de données 
 library(readr)
+library(ggplot2)
 school <- read_delim("./data_LISS/work-and-school.csv", delim = ";", escape_double = FALSE, trim_ws = TRUE)
-
 background<-read_delim("data_LISS/avars_202207_EN_1.0p.csv", delim = ";", escape_double = FALSE, trim_ws = TRUE)
 
-###Fusion des bases de données
+#Fusion des bases de données
 
 agregdata <- merge(background, school, by="nomem_encr" )
 
+## ---- Section 2
 ###Gestion des NA
 
 #détection
@@ -58,6 +59,13 @@ sum(agregdata$educ==18)
 sum((agregdata$cw22o005==27|agregdata$cw22o005==26|agregdata$cw22o005==25)&agregdata$educ!=17)#nombre d'observations "bizarres"
 #On considère que les réponses à la question cw22o005 sont plus fiables car plus précises.
 
+ggplot(agregdata, aes(x=factor(agregdata$educ)))+
+  geom_bar(fill="steelblue")+
+  labs(title="Niveau d'éducation (avec diplôme) des individus de l'échantillon", 
+       x="Nombre d'années de scolarité et d'études (depuis le début de l'école primaire (4 ans))", y = "Effectifs")+
+  geom_text(stat='count', aes(label=after_stat(count)), vjust=1.6, color="white", size=3.5)+
+  theme_minimal()
+
 #On ajoute les études supérieures à educ :
 
 agregdata$educ <- ifelse(agregdata$cw22o005==25, 17,
@@ -75,10 +83,8 @@ ggplot(agregdata, aes(x=factor(agregdata$educ)))+
   theme_minimal()
 
 
+
 ###Création d'une table avec les données pertinentes
-
-
-
 
 data<-data.frame(agregdata$nomem_encr,agregdata$leeftijd,agregdata$geslacht,agregdata$brutoink,agregdata$cw22o127,agregdata$cw22o134, agregdata$educ, agregdata$aantalki)
 names(data)<-c("identite", "age", "genre", "revenu", "heures", "experience","education", "nbenfants")
@@ -224,43 +230,6 @@ exp(8.22)
 
 mean(data$revenu)
 
-
-#Chow
-
-library(ggplot2)
-
-
-ggplot(data, aes(x = data$experience, y = data$log_revenu)) + geom_point(col='steelblue', size=3)
-
-n_exp <- length(data$experience)
-hist(data$experience)
-
-library(strucchange)
-sctest(data$experience ~ data$log_revenu, type="Chow", point=5)
-
-dt1 <- data[data$age <=25,]
-dt2 <- data[data$age>25,]
-
-p_1 <-lm(dt1$log_revenu ~ dt1$experience, data = dt1)
-p_1
-
-p_2 <-lm(dt2$log_revenu ~ dt2$experience, data = dt2)
-p_2
-
-summary(p_1)
-summary(p_2)
-
-p <- lm(data$log_revenu ~ data$experience, data = data)
-
-stat_de_test <- ((sum(p$residuals^2) - ( sum(p_1$residuals^2) + sum(p_2$residuals^2)))/2)/(( sum(p_1$residuals^2) + sum(p_2$residuals^2))/(1860 - 4))
-stat_de_test
-
-##On réessaye Chow
-data <- data[order(data$education),]
-sum(data$education<=16)
-hist(data$education)
-
-
 #Chow méthode manuelle
 
 dt1 <- data[data$education <= 16,]
@@ -280,19 +249,19 @@ summary(p_2)
 
 p <- lm(log_revenu ~ age + genre + heures + experience + nbenfants + education, data = data)
 
-stat_de_test <- ((sum(p$residuals^2) - ( sum(p_1$residuals^2) + sum(p_2$residuals^2)))/7)/(( sum(p_1$residuals^2) + sum(p_2$residuals^2))/(1855 - 14))
+stat_de_test <- ((sum(p$residuals^2) - ( sum(p_1$residuals^2) + sum(p_2$residuals^2)))/7)/(( sum(p_1$residuals^2) + sum(p_2$residuals^2))/(nrow(data) - 14))
 stat_de_test
 
 ggplot(data, aes(x = data$education, y = p$fitted.values)) + geom_point(col='steelblue', size=3)
 
-sum(data$education>16)
-nrow(data)
+sum(data$education<16)
+
 
 #Chow méthode automatique (vérification)
 
 
 library(strucchange)
-sctest(log_revenu ~ age + genre + heures + experience + nbenfants + education, type="Chow", point=704, data=data[order(data$education),])
+sctest(log_revenu ~ age + genre + heures + experience + nbenfants + education, type="Chow", point=sum(data$education<16), data=data[order(data$education),])
 
 nrow(data)
 
@@ -340,7 +309,7 @@ summary(lm(log_revenu ~ pred2 + genre + heures + nbenfants + education, data = d
 # de contrôle, l'effet de l'augmentation 
 # d'un an de l'expérience d'un individu sur
 # le revenu par tête est réel 
-# (+1,2 % environ pour la première spécification,
+# (+1,3 % environ pour la première spécification,
 # +2 % dans la seconde)
 #tandis que cet effet était de 0,3% dans la régression initiale (lm1)
 
@@ -348,5 +317,5 @@ library(AER)
 
 summary(ivreg(log_revenu ~ experience | age, data = data))
 
-modele_iv <- ivreg(log_revenu ~  genre + heures + nbenfants + education | experience + age, data = data) 
+modele_iv <- ivreg(log_revenu ~ education + genre + heures + nbenfants |experience|age, data = data) 
 summary(modele_iv, diagnostics = TRUE)
