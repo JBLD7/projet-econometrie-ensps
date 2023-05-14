@@ -1,6 +1,5 @@
 % !Rnw weave = knitr
-
-\documentclass[a4paper,11 pt]{article}\usepackage[]{graphicx}\usepackage[]{xcolor}
+\documentclass[a4paper, french, 11 pt]{article}\usepackage[]{graphicx}\usepackage[]{xcolor}
 % maxwidth is the original width if it is less than linewidth
 % otherwise use linewidth (to make sure the graphics do not exceed the margin)
 \makeatletter
@@ -51,11 +50,20 @@
 \newenvironment{knitrout}{}{} % an empty environment to be redefined in TeX
 
 \usepackage{alltt}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
 \usepackage{lmodern}
 \usepackage{textcomp}
 \usepackage[french]{babel}
 \usepackage{geometry}
 \geometry{top=1cm, bottom=1cm, left=1cm, right=1cm}
+\usepackage{graphicx}
+\usepackage{epstopdf}
+\usepackage{booktabs}
+\usepackage[skip=0.5\baselineskip]{caption}
+
+\epstopdfDeclareGraphicsRule{.gif}{png}{.png}{convert gif:#1 png:\OutputFile}
+\AppendGraphicsExtensions{.gif}
 
 \title{Titre provisoire}
 \author{Louis Bourges, Jean-Baptiste Lagrange-Dupuis et Luc Letonturier}
@@ -65,7 +73,7 @@
 
 \maketitle
 
-Et ici on peut écrire ... et insérer des blocs de code qui s'éxécutent, avec le code et le résultat ui s'affichent
+Et ici on peut écrire ... et insérer des blocs de code qui s'éxécutent, avec le code et le résultat qui s'affichent
 
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
@@ -93,4 +101,49 @@ ou totalement invisibles :
 
 
 Et ensuite on peut citer les résultats : à première vue $4 < 6$ mais je crois que c'est 8 qui est le plus grand.
+
+
+Un petit graphique : 
+
+
+
+\begin{figure}[h]
+\center
+\includegraphics[width=0.7\linewidth]{figure/educ.pdf}
+\caption{Niveau d'éducation (avec diplôme) des individus de l'échantillon}
+\end{figure}
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{verbatim}
+## [1] 5615
+## [1] 0
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+
+% latex table generated in R 4.2.1 by xtable 1.8-4 package
+% Sun May 14 03:04:22 2023
+\begin{table}[ht]
+\centering
+\caption{Tableau des résidus} 
+\label{tb:lm1}
+\begin{tabular}{rrrrr}
+  \toprule
+ & Estimate & Std. Error & t value & Pr($>$$|$t$|$) \\ 
+  \midrule
+(Intercept) & 5.6786 & 0.1095 & 51.84 & 0.0000 \\ 
+  data\$age & 0.0072 & 0.0010 & 7.11 & 0.0000 \\ 
+  data\$genre & -0.3039 & 0.0225 & -13.53 & 0.0000 \\ 
+  data\$heures & 0.0142 & 0.0008 & 17.03 & 0.0000 \\ 
+  data\$experience & 0.0024 & 0.0011 & 2.15 & 0.0316 \\ 
+  data\$nbenfants & -0.0097 & 0.0096 & -1.01 & 0.3112 \\ 
+  data\$education & 0.1083 & 0.0059 & 18.44 & 0.0000 \\ 
+   \bottomrule
+\end{tabular}
+\end{table}
+
+
+
 \end{document}
