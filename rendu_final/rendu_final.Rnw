@@ -14,6 +14,23 @@
 
 \epstopdfDeclareGraphicsRule{.gif}{png}{.png}{convert gif:#1 png:\OutputFile}
 \AppendGraphicsExtensions{.gif}
+\usepackage{listings}
+\usepackage{inconsolata}
+
+<<echo=FALSE>>=
+library(knitr)
+hook_output = knit_hooks$get('output')
+knit_hooks$set(output = function(x, options) {
+  # this hook is used only when the linewidth option is not NULL
+  if (!is.null(n <- options$linewidth)) {
+    x = xfun::split_lines(x)
+    # any lines wider than n should be wrapped
+    if (any(nchar(x) > n)) x = strwrap(x, width = n)
+    x = paste(x, collapse = '\n')
+  }
+  hook_output(x, options)
+})
+@
 
 \title{Titre provisoire}
 \author{Louis Bourges, Jean-Baptiste Lagrange-Dupuis et Luc Letonturier}
@@ -56,7 +73,7 @@ library(xtable)
 ###Importation des bases de données
 library(readr)
 library(ggplot2)
-school <- read_delim("./data_LISS/work-and-school.csv", delim = ";", escape_double = FALSE, trim_ws = TRUE, show_col_types = FALSE)
+school <- read_delim("data_LISS/work-and-school.csv", delim = ";", escape_double = FALSE, trim_ws = TRUE, show_col_types = FALSE)
 
 background<-read_delim("data_LISS/avars_202207_EN_1.0p.csv", delim = ";", escape_double = FALSE, trim_ws = TRUE, show_col_types = FALSE)
 
@@ -174,5 +191,10 @@ lm1 <- lm(data$log_revenu ~ data$age + data$genre + data$heures + data$experienc
 print(xtable(summary(lm1), caption="Tableau des résidus", label="tb:lm1"), booktabs=TRUE, caption.placement="top")
 @
 
+Ici c'est l'annexe 
+
+<<ref.label=knitr::all_labels()>>=
+
+@
 
 \end{document}
