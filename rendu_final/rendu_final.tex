@@ -60,7 +60,6 @@
 \usepackage{graphicx}
 \usepackage{epstopdf}
 \usepackage{booktabs}
-\usepackage[skip=0.5\baselineskip]{caption}
 
 \epstopdfDeclareGraphicsRule{.gif}{png}{.png}{convert gif:#1 png:\OutputFile}
 \AppendGraphicsExtensions{.gif}
@@ -123,8 +122,9 @@ Un petit graphique :
 \end{knitrout}
 
 
+\begin{figure}
 % latex table generated in R 4.2.1 by xtable 1.8-4 package
-% Sun May 14 03:04:22 2023
+% Sun May 14 02:59:29 2023
 \begin{table}[ht]
 \centering
 \caption{Tableau des résidus} 
@@ -144,6 +144,6 @@ Un petit graphique :
 \end{tabular}
 \end{table}
 
-
+\end{figure}
 
 \end{document}
