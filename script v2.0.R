@@ -219,7 +219,7 @@ model_White <- lm(ln_resi2 ~ experience + genre + heures + age + nbenfants + edu
                     genre2 + heures2 + age2, 
                   data)
 summary(model_White)
-#le test de white manuel est lui aussi significatif
+#p value très faible, mais la statistique l'est aussi, il y a normalement 28 degrés de liberté donc on ne rejette pas l'hypotèse nulle 
 
 modele <- lm(data$log_revenu ~ data$age + data$genre + data$heures + data$experience + data$nbenfants + data$education)
 smodele <- summary(modele)
