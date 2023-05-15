@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.4.24)  15 MAY 2023 13:41
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.4.24)  15 MAY 2023 22:00
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -671,30 +671,50 @@ File: csquotes.cfg
 )
 Package csquotes Info: Redefining alias 'french' -> 'french/quotes'.
 )
+(/usr/local/texlive/2023/texmf-dist/tex/latex/enumitem/enumitem.sty
+Package: enumitem 2019/06/20 v3.9 Customized lists
+\labelindent=\skip74
+\enit@outerparindent=\dimen190
+\enit@toks=\toks22
+\enit@inbox=\box52
+\enit@count@id=\count422
+\enitdp@description=\count423
+)
+(/usr/local/texlive/2023/texmf-dist/tex/latex/tools/array.sty
+Package: array 2022/09/04 v2.5g Tabular extension package (FMi)
+\col@sep=\dimen191
+\ar@mcellbox=\box53
+\extrarowheight=\dimen192
+\NC@list=\toks23
+\extratabsurround=\skip75
+\backup@length=\skip76
+\ar@cellbox=\box54
+)
+\c@rownumbers=\count424
 Package grfext Info: Graphics extension search list:
 (grfext)             [.pdf,.png,.jpg,.mps,.jpeg,.jbig2,.jb2,.PDF,.PNG,.JPG,.JPE
 G,.JBIG2,.JB2,.eps,.gif]
-(grfext)             \AppendGraphicsExtensions on input line 71.
+(grfext)             \AppendGraphicsExtensions on input line 77.
 
 (/usr/local/texlive/2023/texmf-dist/tex/latex/listings/listings.sty
-\lst@mode=\count422
-\lst@gtempboxa=\box52
-\lst@token=\toks22
-\lst@length=\count423
-\lst@currlwidth=\dimen190
-\lst@column=\count424
-\lst@pos=\count425
-\lst@lostspace=\dimen191
-\lst@width=\dimen192
-\lst@newlines=\count426
-\lst@lineno=\count427
-\lst@maxwidth=\dimen193
+\lst@mode=\count425
+\lst@gtempboxa=\box55
+\lst@token=\toks24
+\lst@length=\count426
+\lst@currlwidth=\dimen193
+\lst@column=\count427
+\lst@pos=\count428
+\lst@lostspace=\dimen194
+\lst@width=\dimen195
+\lst@newlines=\count429
+\lst@lineno=\count430
+\lst@maxwidth=\dimen196
 
 (/usr/local/texlive/2023/texmf-dist/tex/latex/listings/lstmisc.sty
 File: lstmisc.sty 2023/02/27 1.9 (Carsten Heinz)
-\c@lstnumber=\count428
-\lst@skipnumbers=\count429
-\lst@framebox=\box53
+\c@lstnumber=\count431
+\lst@skipnumbers=\count432
+\lst@framebox=\box56
 )
 (/usr/local/texlive/2023/texmf-dist/tex/latex/listings/listings.cfg
 File: listings.cfg 2023/02/27 1.9 listings configuration
@@ -710,13 +730,19 @@ Package: xkeyval 2022/06/16 v2.9 package option processing (HA)
 
 (/usr/local/texlive/2023/texmf-dist/tex/generic/xkeyval/xkeyval.tex
 (/usr/local/texlive/2023/texmf-dist/tex/generic/xkeyval/xkvutils.tex
-\XKV@toks=\toks23
-\XKV@tempa@toks=\toks24
+\XKV@toks=\toks25
+\XKV@tempa@toks=\toks26
 )
-\XKV@depth=\count430
+\XKV@depth=\count433
 File: xkeyval.tex 2014/12/03 v2.7a key=value parser (HA)
 ))
-\zifour@ocount=\count431
+\zifour@ocount=\count434
+)
+(/usr/local/texlive/2023/texmf-dist/tex/latex/appendix/appendix.sty
+Package: appendix 2020/02/08 v1.2c extra appendix facilities
+\c@@pps=\count435
+\c@@ppsavesec=\count436
+\c@@ppsaveapp=\count437
 )
 (/usr/local/texlive/2023/texmf-dist/tex/latex/upquote/upquote.sty
 Package: upquote 2012/04/19 v1.3 upright-quote and grave-accent glyphs in verba
@@ -726,7 +752,7 @@ Package csquotes Info: Checking for multilingual support...
 Package csquotes Info: ... found 'babel' package.
 Package csquotes Info: Adjusting default style.
 Package csquotes Info: Redefining alias 'default' -> 'french'.
-LaTeX Font Info:    Trying to load font information for T1+lmr on input line 85
+LaTeX Font Info:    Trying to load font information for T1+lmr on input line 94
 .
 
 (/usr/local/texlive/2023/texmf-dist/tex/latex/lm/t1lmr.fd
@@ -734,41 +760,47 @@ File: t1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 ) (./rendu_final.aux)
 \openout1 = `rendu_final.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 85.
-LaTeX Font Info:    ... okay on input line 85.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 85.
-LaTeX Font Info:    ... okay on input line 85.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 85.
-LaTeX Font Info:    ... okay on input line 85.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 85.
-LaTeX Font Info:    ... okay on input line 85.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 85.
-LaTeX Font Info:    ... okay on input line 85.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 85.
-LaTeX Font Info:    ... okay on input line 85.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 85.
-LaTeX Font Info:    ... okay on input line 85.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 85.
-LaTeX Font Info:    ... okay on input line 85.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 85.
-LaTeX Font Info:    ... okay on input line 85.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 94.
+LaTeX Font Info:    ... okay on input line 94.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 94.
+LaTeX Font Info:    ... okay on input line 94.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 94.
+LaTeX Font Info:    ... okay on input line 94.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 94.
+LaTeX Font Info:    ... okay on input line 94.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 94.
+LaTeX Font Info:    ... okay on input line 94.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 94.
+LaTeX Font Info:    ... okay on input line 94.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 94.
+LaTeX Font Info:    ... okay on input line 94.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 94.
+LaTeX Font Info:    ... okay on input line 94.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 94.
+LaTeX Font Info:    ... okay on input line 94.
 
 (/usr/local/texlive/2023/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count432
-\scratchdimen=\dimen194
-\scratchbox=\box54
-\nofMPsegments=\count433
-\nofMParguments=\count434
-\everyMPshowfont=\toks25
-\MPscratchCnt=\count435
-\MPscratchDim=\dimen195
-\MPnumerator=\count436
-\makeMPintoPDFobject=\count437
-\everyMPtoPDFconversion=\toks26
+\scratchcounter=\count438
+\scratchdimen=\dimen197
+\scratchbox=\box57
+\nofMPsegments=\count439
+\nofMParguments=\count440
+\everyMPshowfont=\toks27
+\MPscratchCnt=\count441
+\MPscratchDim=\dimen198
+\MPnumerator=\count442
+\makeMPintoPDFobject=\count443
+\everyMPtoPDFconversion=\toks28
 )
-LaTeX Info: Redefining \degres on input line 85.
-LaTeX Info: Redefining \up on input line 85.
+LaTeX Info: Redefining \degres on input line 94.
+Package french.ldf Info: Setting StandardItemizeEnv=true for
+(french.ldf)             compatibility with enumitem package,
+(french.ldf)             reported on input line 94.
+Package french.ldf Info: Setting StandardEnumerateEnv=true for
+(french.ldf)             compatibility with enumitem package,
+(french.ldf)             reported on input line 94.
+LaTeX Info: Redefining \up on input line 94.
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
@@ -804,7 +836,7 @@ LaTeX Info: Redefining \up on input line 85.
 * \@reversemarginfalse
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
-Package hyperref Info: Link coloring OFF on input line 85.
+Package hyperref Info: Link coloring OFF on input line 94.
 (./rendu_final.out) (./rendu_final.out)
 \@outlinefile=\write4
 \openout4 = `rendu_final.out'.
@@ -827,108 +859,145 @@ Package biblatex Info: Trying to load bibliographic data...
 Package biblatex Info: ... file 'rendu_final.bbl' found.
 
 (./rendu_final.bbl)
-Package biblatex Info: Reference section=0 on input line 85.
-Package biblatex Info: Reference segment=0 on input line 85.
-\c@lstlisting=\count438
-LaTeX Font Info:    Trying to load font information for OT1+lmr on input line 8
-8.
+Package biblatex Info: Reference section=0 on input line 94.
+Package biblatex Info: Reference segment=0 on input line 94.
+\c@lstlisting=\count444
+LaTeX Font Info:    Trying to load font information for OT1+lmr on input line 9
+7.
  (/usr/local/texlive/2023/texmf-dist/tex/latex/lm/ot1lmr.fd
 File: ot1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
-LaTeX Font Info:    Trying to load font information for OML+lmm on input line 8
-8.
+LaTeX Font Info:    Trying to load font information for OML+lmm on input line 9
+7.
 (/usr/local/texlive/2023/texmf-dist/tex/latex/lm/omllmm.fd
 File: omllmm.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
 LaTeX Font Info:    Trying to load font information for OMS+lmsy on input line 
-88.
+97.
 
 (/usr/local/texlive/2023/texmf-dist/tex/latex/lm/omslmsy.fd
 File: omslmsy.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
 LaTeX Font Info:    Trying to load font information for OMX+lmex on input line 
-88.
+97.
 
 (/usr/local/texlive/2023/texmf-dist/tex/latex/lm/omxlmex.fd
 File: omxlmex.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <12> on input line 88.
+(Font)              <12> on input line 97.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <8> on input line 88.
+(Font)              <8> on input line 97.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <6> on input line 88.
+(Font)              <6> on input line 97.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <10.95> on input line 93.
-LaTeX Font Info:    Trying to load font information for T1+zi4 on input line 10
-1.
+(Font)              <10.95> on input line 102.
+LaTeX Font Info:    Trying to load font information for T1+zi4 on input line 11
+0.
 
 (/usr/local/texlive/2023/texmf-dist/tex/latex/inconsolata/t1zi4.fd
 File: t1zi4.fd 2018/01/14 T1/zi4 (Inconsolata)
 )
 LaTeX Font Info:    Font shape `T1/zi4/m/n' will be
-(Font)              scaled to size 10.95pt on input line 101.
+(Font)              scaled to size 10.95pt on input line 110.
  [1
 
 {/usr/local/texlive/2023/texmf-var/fonts/map/pdftex/updmap/pdftex.map}{/usr/loc
 al/texlive/2023/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc}{/usr/local/texlive/202
 3/texmf-dist/fonts/enc/dvips/inconsolata/i4-t1-0.enc}]
-<figure/plot_hetero_fitted.pdf, id=50, 1084.05pt x 722.7pt>
+<figure/plot_hetero_fitted.pdf, id=94, 1084.05pt x 722.7pt>
 File: figure/plot_hetero_fitted.pdf Graphic file (type pdf)
 <use figure/plot_hetero_fitted.pdf>
-Package pdftex.def Info: figure/plot_hetero_fitted.pdf  used on input line 113.
+Package pdftex.def Info: figure/plot_hetero_fitted.pdf  used on input line 122.
 
 (pdftex.def)             Requested size: 204.9466pt x 136.63072pt.
-<figure/plot_hetero_heures.pdf, id=51, 1084.05pt x 722.7pt>
+<figure/plot_hetero_heures.pdf, id=95, 1084.05pt x 722.7pt>
 File: figure/plot_hetero_heures.pdf Graphic file (type pdf)
 <use figure/plot_hetero_heures.pdf>
-Package pdftex.def Info: figure/plot_hetero_heures.pdf  used on input line 114.
+Package pdftex.def Info: figure/plot_hetero_heures.pdf  used on input line 123.
 
 (pdftex.def)             Requested size: 204.9466pt x 136.63072pt.
-<figure/hetero_correct.pdf, id=53, 1084.05pt x 722.7pt>
+<figure/hetero_correct.pdf, id=97, 1084.05pt x 722.7pt>
 File: figure/hetero_correct.pdf Graphic file (type pdf)
 <use figure/hetero_correct.pdf>
-Package pdftex.def Info: figure/hetero_correct.pdf  used on input line 124.
+Package pdftex.def Info: figure/hetero_correct.pdf  used on input line 133.
 (pdftex.def)             Requested size: 292.77629pt x 195.18674pt.
  [2{/usr/local/texlive/2023/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc}{/usr/local
 /texlive/2023/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc}{/usr/local/texlive/2
 023/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc} <./figure/plot_hetero_fitted.p
 df> <./figure/plot_hetero_heures.pdf> <./figure/hetero_correct.pdf>]
-<figure/educ.pdf, id=80, 1084.05pt x 722.7pt>
+
+LaTeX Font Warning: Font shape `T1/zi4/m/it' undefined
+(Font)              using `T1/zi4/m/n' instead on input line 174.
+
+<figure/heures_logrevenu.pdf, id=126, 1084.05pt x 722.7pt>
+File: figure/heures_logrevenu.pdf Graphic file (type pdf)
+<use figure/heures_logrevenu.pdf>
+Package pdftex.def Info: figure/heures_logrevenu.pdf  used on input line 179.
+(pdftex.def)             Requested size: 292.77629pt x 195.18674pt.
+[3 <./figure/heures_logrevenu.pdf>] [4]
+LaTeX Font Info:    Font shape `T1/zi4/b/n' will be
+(Font)              scaled to size 12.0pt on input line 247.
+LaTeX Font Info:    Font shape `T1/zi4/m/n' will be
+(Font)              scaled to size 9.0pt on input line 257.
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <9> on input line 260.
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <5> on input line 260.
+
+Underfull \hbox (badness 4713) in paragraph at lines 266--266
+[]|\T1/lmr/m/n/9 3. ha-vo/vwo (hi-gher se-con-dary edu-
+ []
+
+
+Overfull \hbox (24.0pt too wide) in paragraph at lines 260--275
+[][] 
+ []
+
+[5]
+Overfull \hbox (24.0pt too wide) in paragraph at lines 285--294
+[][] 
+ []
+
+<figure/educ.pdf, id=151, 1084.05pt x 722.7pt>
 File: figure/educ.pdf Graphic file (type pdf)
 <use figure/educ.pdf>
-Package pdftex.def Info: figure/educ.pdf  used on input line 169.
+Package pdftex.def Info: figure/educ.pdf  used on input line 300.
 (pdftex.def)             Requested size: 292.77629pt x 195.18674pt.
- [3 <./figure/educ.pdf>] (./rendu_final.aux)
+[6 <./figure/educ.pdf>] [7] (./rendu_final.aux)
+
+LaTeX Font Warning: Some font shapes were not available, defaults substituted.
+
 Package rerunfilecheck Info: File `rendu_final.out' has not changed.
-(rerunfilecheck)             Checksum: 4347B07A1661340BC4F947D412C61F20;1614.
+(rerunfilecheck)             Checksum: A1B2623E472BE76D9ED5A9671C7C096E;3748.
 Package logreq Info: Writing requests to 'rendu_final.run.xml'.
 \openout1 = `rendu_final.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 22732 strings out of 476001
- 399561 string characters out of 5789199
- 1866074 words of memory out of 5000000
- 42903 multiletter control sequences out of 15000+600000
- 563603 words of font info for 59 fonts, out of 8000000 for 9000
+ 23303 strings out of 476001
+ 409243 string characters out of 5789199
+ 1865074 words of memory out of 5000000
+ 43440 multiletter control sequences out of 15000+600000
+ 577424 words of font info for 69 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 75i,9n,76p,1310b,1765s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 75i,10n,76p,1876b,1765s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/local/texlive/2023/texmf-dist/fonts/type1/public/inconsolata/Inconsolat
-a-zi4r.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/lm/lmbx12.pfb
-></usr/local/texlive/2023/texmf-dist/fonts/type1/public/lm/lmcsc10.pfb></usr/lo
-cal/texlive/2023/texmf-dist/fonts/type1/public/lm/lmmi10.pfb></usr/local/texliv
-e/2023/texmf-dist/fonts/type1/public/lm/lmr10.pfb></usr/local/texlive/2023/texm
-f-dist/fonts/type1/public/lm/lmr17.pfb></usr/local/texlive/2023/texmf-dist/font
-s/type1/public/lm/lmr8.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/publ
-ic/lm/lmr9.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/lm/lmri10
-.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/lm/lmri9.pfb></usr/
-local/texlive/2023/texmf-dist/fonts/type1/public/lm/lmsy10.pfb></usr/local/texl
-ive/2023/texmf-dist/fonts/type1/public/lm/lmsy8.pfb>
-Output written on rendu_final.pdf (3 pages, 545671 bytes).
+a-zi4b.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/inconsolata/I
+nconsolata-zi4r.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/lm/l
+mbx12.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/lm/lmcsc10.pfb
+></usr/local/texlive/2023/texmf-dist/fonts/type1/public/lm/lmmi10.pfb></usr/loc
+al/texlive/2023/texmf-dist/fonts/type1/public/lm/lmr10.pfb></usr/local/texlive/
+2023/texmf-dist/fonts/type1/public/lm/lmr17.pfb></usr/local/texlive/2023/texmf-
+dist/fonts/type1/public/lm/lmr8.pfb></usr/local/texlive/2023/texmf-dist/fonts/t
+ype1/public/lm/lmr9.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/
+lm/lmri10.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/lm/lmri9.p
+fb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/lm/lmsy10.pfb></usr/l
+ocal/texlive/2023/texmf-dist/fonts/type1/public/lm/lmsy8.pfb>
+Output written on rendu_final.pdf (7 pages, 686280 bytes).
 PDF statistics:
- 160 PDF objects out of 1000 (max. 8388607)
- 119 compressed objects within 2 object streams
- 19 named destinations out of 1000 (max. 500000)
- 69 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 241 PDF objects out of 1000 (max. 8388607)
+ 192 compressed objects within 2 object streams
+ 35 named destinations out of 1000 (max. 500000)
+ 162 words of extra memory for PDF output out of 10000 (max. 10000000)
 
