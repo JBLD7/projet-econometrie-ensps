@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.4.24)  15 MAY 2023 13:10
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.4.24)  15 MAY 2023 13:41
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -873,40 +873,33 @@ LaTeX Font Info:    Font shape `T1/zi4/m/n' will be
 {/usr/local/texlive/2023/texmf-var/fonts/map/pdftex/updmap/pdftex.map}{/usr/loc
 al/texlive/2023/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc}{/usr/local/texlive/202
 3/texmf-dist/fonts/enc/dvips/inconsolata/i4-t1-0.enc}]
-
-LaTeX Font Warning: Font shape `T1/zi4/m/it' undefined
-(Font)              using `T1/zi4/m/n' instead on input line 109.
-
-LaTeX Font Info:    Font shape `T1/zi4/m/it' will be
-(Font)              scaled to size 10.95pt on input line 111.
 <figure/plot_hetero_fitted.pdf, id=50, 1084.05pt x 722.7pt>
 File: figure/plot_hetero_fitted.pdf Graphic file (type pdf)
 <use figure/plot_hetero_fitted.pdf>
-Package pdftex.def Info: figure/plot_hetero_fitted.pdf  used on input line 122.
+Package pdftex.def Info: figure/plot_hetero_fitted.pdf  used on input line 113.
 
 (pdftex.def)             Requested size: 204.9466pt x 136.63072pt.
 <figure/plot_hetero_heures.pdf, id=51, 1084.05pt x 722.7pt>
 File: figure/plot_hetero_heures.pdf Graphic file (type pdf)
 <use figure/plot_hetero_heures.pdf>
-Package pdftex.def Info: figure/plot_hetero_heures.pdf  used on input line 123.
+Package pdftex.def Info: figure/plot_hetero_heures.pdf  used on input line 114.
 
 (pdftex.def)             Requested size: 204.9466pt x 136.63072pt.
-<figure/educ.pdf, id=52, 1084.05pt x 722.7pt>
+<figure/hetero_correct.pdf, id=53, 1084.05pt x 722.7pt>
+File: figure/hetero_correct.pdf Graphic file (type pdf)
+<use figure/hetero_correct.pdf>
+Package pdftex.def Info: figure/hetero_correct.pdf  used on input line 124.
+(pdftex.def)             Requested size: 292.77629pt x 195.18674pt.
+ [2{/usr/local/texlive/2023/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc}{/usr/local
+/texlive/2023/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc}{/usr/local/texlive/2
+023/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc} <./figure/plot_hetero_fitted.p
+df> <./figure/plot_hetero_heures.pdf> <./figure/hetero_correct.pdf>]
+<figure/educ.pdf, id=80, 1084.05pt x 722.7pt>
 File: figure/educ.pdf Graphic file (type pdf)
 <use figure/educ.pdf>
 Package pdftex.def Info: figure/educ.pdf  used on input line 169.
 (pdftex.def)             Requested size: 292.77629pt x 195.18674pt.
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-[2{/usr/local/texlive/2023/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc}{/usr/local/
-texlive/2023/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc}{/usr/local/texlive/20
-23/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc} <./figure/plot_hetero_fitted.pd
-f> <./figure/plot_hetero_heures.pdf>] [3 <./figure/educ.pdf>]
-(./rendu_final.aux)
-
-LaTeX Font Warning: Some font shapes were not available, defaults substituted.
-
+ [3 <./figure/educ.pdf>] (./rendu_final.aux)
 Package rerunfilecheck Info: File `rendu_final.out' has not changed.
 (rerunfilecheck)             Checksum: 4347B07A1661340BC4F947D412C61F20;1614.
 Package logreq Info: Writing requests to 'rendu_final.run.xml'.
@@ -914,10 +907,10 @@ Package logreq Info: Writing requests to 'rendu_final.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 22725 strings out of 476001
- 399330 string characters out of 5789199
- 1864074 words of memory out of 5000000
- 42898 multiletter control sequences out of 15000+600000
+ 22732 strings out of 476001
+ 399561 string characters out of 5789199
+ 1866074 words of memory out of 5000000
+ 42903 multiletter control sequences out of 15000+600000
  563603 words of font info for 59 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  75i,9n,76p,1310b,1765s stack positions out of 10000i,1000n,20000p,200000b,200000s
@@ -932,10 +925,10 @@ ic/lm/lmr9.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/lm/lmri10
 .pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/lm/lmri9.pfb></usr/
 local/texlive/2023/texmf-dist/fonts/type1/public/lm/lmsy10.pfb></usr/local/texl
 ive/2023/texmf-dist/fonts/type1/public/lm/lmsy8.pfb>
-Output written on rendu_final.pdf (3 pages, 453407 bytes).
+Output written on rendu_final.pdf (3 pages, 545671 bytes).
 PDF statistics:
- 151 PDF objects out of 1000 (max. 8388607)
- 112 compressed objects within 2 object streams
- 18 named destinations out of 1000 (max. 500000)
- 64 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 160 PDF objects out of 1000 (max. 8388607)
+ 119 compressed objects within 2 object streams
+ 19 named destinations out of 1000 (max. 500000)
+ 69 words of extra memory for PDF output out of 10000 (max. 10000000)
 

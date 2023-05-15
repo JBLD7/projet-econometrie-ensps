@@ -54,7 +54,7 @@ Nous avons sélectionné plusieurs variables au sein de l’enquête \textit{Wor
 
 \subsection{Détection et correction de l’hétéroscédasticité}
 
-<<echo=FALSE, results="hide", warning=FALSE>>=
+<<echo=FALSE, results="hide", warning=FALSE, include=FALSE>>=
 setwd("~/projet-econometrie-ensps")
 library(ggplot2)
 update_geom_defaults("text", list(size=30))
@@ -219,18 +219,52 @@ LM_pval#mêmes résultats qu'avec méthode auto !!
 
 
 
-Afin de vérifier la présence ou non d’hétéroscédasticité au sein de notre modèle, nous avons réalisé les deux variantes du test de Breusch-Pagan (avec un test de Fisher et avec un test du rapport de vraisemblance) ansi qu’un test de White. Tous concordent et corroborent la présence d’hétéroscédasticité, qui est par ailleurs observable graphiquement : la répartition des résidus en fonction des données prédites n’est pas homogène et l’on observe une forte variabilité de ces résidus en fonction de certaines variables du modèle, notamment la variable heures (\bsc{Figure} \ref{fig:hetero}). Avec le test de Breusch-Pagan avec le rapport de vraisemblance, dont nous avons vérifié les résultats via la commande \verb+bptest()+, nous obtenons une statistique de \Sexpr{bp$statistic} et une p.value de \Sexpr{bp$p.value}, qui nous permet de rejeter l’hypothèse nulle au seuil significatif de 0,01. 
+Afin de vérifier la présence ou non d’hétéroscédasticité au sein de notre modèle, nous avons réalisé les deux variantes du test de Breusch-Pagan (avec un test de Fisher et avec un test du rapport de vraisemblance) ainsi qu’un test de White. Tous concordent et corroborent la présence d’hétéroscédasticité, qui est par ailleurs observable graphiquement : la répartition des résidus en fonction des données prédites n’est pas homogène et l’on observe une forte variabilité de ces résidus en fonction de certaines variables du modèle, notamment la variable heures (\bsc{Figure} \ref{fig:hetero}). Avec le test de Breusch-Pagan avec le rapport de vraisemblance, dont nous avons vérifié les résultats via la commande \verb+bptest()+, nous obtenons une statistique de \Sexpr{bp$statistic} et une p.value de \Sexpr{bp$p.value}, qui nous permet de rejeter l’hypothèse nulle au seuil significatif de 0,01. 
 
 \begin{figure}[h]
 \center
 \includegraphics[width=0.49\linewidth]{figure/plot_hetero_fitted.pdf}
 \includegraphics[width=0.49\linewidth]{figure/plot_hetero_heures.pdf}
-\caption{Répartition des résidus en fonction des valeurs prédites et de la variable heures\label{fig:hetero}}
+\caption{Répartition des résidus\label{fig:hetero}}
 \end{figure}
 
 <<echo=FALSE, results="hide">>=
+modele <- lm(data$log_revenu ~ data$age + data$genre + data$heures + data$experience + data$nbenfants + data$education)
+smodele <- summary(modele)
+library(lmtest)
+library(sandwich)
 
+modele_robust <- coeftest(modele, vcov = vcovHC(modele, type = "HC1"))
+modele_robust
+
+library(estimatr)
+modele_robust3 <- lm_robust(data=data,log_revenu ~ age + genre + heures + experience + nbenfants + education, se_type = "HC1")
+summary(modele_robust3)
+
+###On retient le modèle robuste 3 :
+
+modele <- modele_robust3
+summary(modele)
+
+data$uhat <- modele$res_var
+data$yhat <- modele$fitted.values
+
+hetero_correct <- ggplot(data = data, mapping = aes(x = yhat, y = uhat)) +
+  theme_minimal(base_size = 22) +
+  geom_point(col = 'steelblue') +
+  geom_hline(yintercept = 0, col = 'steelblue') +
+  labs(y = 'Residus', x = 'Valeurs prédites')
+ggsave(hetero_correct, filename = "figure/hetero_correct.pdf", width=15, height=10)
 @
+
+Nous avons corrigé l'hétéroscédasticité en utilisant la méthode de white (variante HC1), via la commande \verb+coeftest+. Après correction, nous obtenons le graphique \ref{fig:hetero_correct}.
+
+\begin{figure}[h]
+\center
+\includegraphics[width=0.7\linewidth]{figure/hetero_correct.pdf}
+\caption{Répartition des résidus en fonction des valeurs prédites\label{fig:hetero_correct}}
+\end{figure}
+
 
 
 \subsection{Détection de l’endogénéité et pistes de correction}

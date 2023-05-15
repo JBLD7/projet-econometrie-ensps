@@ -523,7 +523,7 @@ LM_pval#mêmes résultats qu’avec méthode auto !! @</p>
 <p>Afin de vérifier la présence ou non d’hétéroscédasticité au sein de
 notre modèle, nous avons réalisé les deux variantes du test de
 Breusch-Pagan (avec un test de Fisher et avec un test du rapport de
-vraisemblance) ansi qu’un test de White. Tous concordent et corroborent
+vraisemblance) ainsi qu’un test de White. Tous concordent et corroborent
 la présence d’hétéroscédasticité, qui est par ailleurs observable
 graphiquement : la répartition des résidus en fonction des données
 prédites n’est pas homogène et l’on observe une forte variabilité de ces
@@ -533,6 +533,51 @@ Breusch-Pagan avec le rapport de vraisemblance, dont nous avons vérifié
 les résultats via la commande , nous obtenons une statistique de et une
 p.value de , qui nous permet de rejeter l’hypothèse nulle au seuil
 significatif de 0,01.</p>
+<p>&lt;&lt;echo=FALSE, results=“hide”&gt;&gt;= ###Méthode de white</p>
+<p>#Méthode manuelle</p>
+<p>data<span class="math inline">\(experience2 &lt;-
+data\)</span>experience<em>data<span class="math inline">\(experience
+data\)</span>age2 &lt;- data<span class="math inline">\(age*data\)</span>age data<span class="math inline">\(heures2 &lt;- data\)</span>heures</em>data<span class="math inline">\(heures data\)</span>genre2 &lt;- data<span class="math inline">\(genre^2 data\)</span>education2 &lt;- data<span class="math inline">\(education^2 data\)</span>nbenfants2 &lt;-
+data$nbenfants^2</p>
+<p>data<span class="math inline">\(var_crois_1 &lt;-
+data\)</span>experience<em>data<span class="math inline">\(age
+data\)</span>var_crois_2 &lt;- data<span class="math inline">\(experience*data\)</span>genre data<span class="math inline">\(var_crois_3 &lt;-
+data\)</span>experience</em>data<span class="math inline">\(heures
+data\)</span>var_crois_4 &lt;- data<span class="math inline">\(experience*data\)</span>nbenfants data<span class="math inline">\(var_crois_5 &lt;-
+data\)</span>experience<em>data<span class="math inline">\(education
+data\)</span>var_crois_6 &lt;- data<span class="math inline">\(genre*data\)</span>heures data<span class="math inline">\(var_crois_7 &lt;- data\)</span>genre</em>data<span class="math inline">\(age data\)</span>var_crois_8 &lt;- data<span class="math inline">\(genre*data\)</span>nbenfants data<span class="math inline">\(var_crois_9 &lt;- data\)</span>genre<em>data<span class="math inline">\(education data\)</span>var_crois_10 &lt;-
+data<span class="math inline">\(heures*data\)</span>age data<span class="math inline">\(var_crois_11 &lt;-
+data\)</span>heures</em>data<span class="math inline">\(nbenfants
+data\)</span>var_crois_12 &lt;- data<span class="math inline">\(heures*data\)</span>education data<span class="math inline">\(var_crois_13 &lt;- data\)</span>age<em>data<span class="math inline">\(nbenfants data\)</span>var_crois_14 &lt;-
+data<span class="math inline">\(age*data\)</span>education data<span class="math inline">\(var_crois_15 &lt;-
+data\)</span>nbenfants</em>data$education</p>
+<div id="regression-pour-le-test-de-white" class="section level1">
+<h1>Regression pour le test de White</h1>
+<p>model_White &lt;- lm(ln_resi2 ~ experience + genre + heures + age +
+nbenfants + education + var_crois_1 + var_crois_2 + var_crois_3 +
+var_crois_4 + var_crois_5 + var_crois_6 + var_crois_7 + var_crois_8 +
+var_crois_9 + var_crois_10 + var_crois_11 + var_crois_12+ var_crois_13 +
+var_crois_14 + var_crois_15 + experience2 + education2 + nbenfants2 +
+genre2 + heures2 + age2, data) summary(model_White) #p value très
+faible, mais la statistique l’est aussi, il y a normalement 28 degrés de
+liberté donc on ne rejette pas l’hypotèse nulle</p>
+<p>modele &lt;- lm(data<span class="math inline">\(log_revenu ~
+data\)</span>age + data<span class="math inline">\(genre +
+data\)</span>heures + data<span class="math inline">\(experience +
+data\)</span>nbenfants + data$education) smodele &lt;- summary(modele)
+library(lmtest) library(sandwich)</p>
+<p>modele_robust &lt;- coeftest(modele, vcov = vcovHC(modele, type =
+“HC1”)) modele_robust</p>
+<p>library(lmtest) library(car) modele_robust2 &lt;- coeftest(modele,
+vcov = hccm(modele, type = “hc1”)) modele_robust2
+confint(modele_robust)</p>
+<p>#méthode de white (méthode 2, paquet + récent) library(estimatr)
+modele_robust3 &lt;- lm_robust(data=data,log_revenu ~ age + genre +
+heures + experience + nbenfants + education, se_type = “HC1”)
+summary(modele_robust3) @</p>
+<p>Nous avons corrigé l’hétéroscédasticité en utilisant la méthode de
+white (variante HC1), via la commande . Après correction, nous obtenons
+le graphique <span class="math inline">\(\ref{fig:hetero_correct}\)</span>.</p>
 <p>Et ici on peut écrire … et insérer des blocs de code qui s’éxécutent,
 avec le code et le résultat qui s’affichent</p>
 <p>&lt;&lt;&gt;&gt;= a &lt;- 2+2 a</p>
@@ -584,6 +629,7 @@ data\)</span>nbenfants + data$education)</p>
 print(xtable(summary(lm1), caption=“Tableau des résidus”,
 label=“tb:lm1”), booktabs=TRUE, caption.placement=“top”) @</p>
 <p>\end{document}</p>
+</div>
 
 
 
