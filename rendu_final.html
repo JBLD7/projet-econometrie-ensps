@@ -393,28 +393,10 @@ correspond au nombre d’heures de travail effectuées en moyenne chaque
 semaine tandis qu’ mesure l’ancienneté des salariés dans leur entreprise
 (en années). Enfin, indique le nombre d’enfants présents dans le
 foyer.</p>
-<p>Afin de vérifier la présence ou non d’hétéroscédasticité au sein de
-notre modèle, nous avons réalisé les deux variantes du test de
-Breusch-Pagan (avec un test de Fisher et avec un test du rapport de
-vraisemblance) ansi qu’un test de White. Tous concordent et corroborent
-la présence d’hétéroscédasticité, qui est par ailleurs observable
-graphiquement : la répartition des résidus en fonction des données
-prédites n’est pas homogène et l’on observe une forte variabilité de ces
-résidus en fonction de certaines variables du modèle, notamment la
-variable heures.</p>
-<p>Et ici on peut écrire … et insérer des blocs de code qui s’éxécutent,
-avec le code et le résultat qui s’affichent</p>
-<p>&lt;&lt;&gt;&gt;= a &lt;- 2+2 a</p>
-<p>@</p>
-<p>ou juste le résultat :</p>
-<p>&lt;&lt; echo=FALSE&gt;&gt;= b &lt;-3+3 b @</p>
-<p>ou totalement invisibles : &lt;&lt;echo=FALSE,
-results=“hide”&gt;&gt;= c &lt;- 4+4 c @</p>
-<p>Et ensuite on peut citer les résultats : à première vue <span class="math inline">\(\Sexpr{a} &lt; \Sexpr{b}\)</span> mais je crois
-que c’est qui est le plus grand.</p>
-<p>&lt;&lt;echo=FALSE, results=“hide”, warning=FALSE&gt;&gt;=
-setwd(“~/projet-econometrie-ensps”) library(ggplot2)
-update_geom_defaults(“text”, list(size=30)) library(xtable)</p>
+<p>&lt;&lt;echo=FALSE, results=“hide”, warning=FALSE,
+include=FALSE&gt;&gt;= setwd(“~/projet-econometrie-ensps”)
+library(ggplot2) update_geom_defaults(“text”, list(size=30))
+library(xtable)</p>
 <p>###Importation des bases de données library(readr) library(ggplot2)
 school &lt;- read_delim(“data_LISS/work-and-school.csv”, delim = “;”,
 escape_double = FALSE, trim_ws = TRUE, show_col_types = FALSE)</p>
@@ -463,7 +445,104 @@ sum(agregdata<span class="math inline">\(educ==18)
 sum((agregdata\)</span>cw22o005==27|agregdata<span class="math inline">\(cw22o005==26|agregdata\)</span>cw22o005==25)&amp;agregdata$educ!=17)#nombre
 d’observations “bizarres” #On considère que les réponses à la question
 cw22o005 sont plus fiables car plus précises.</p>
-<p>@ Un petit graphique :</p>
+<p>ploteduc &lt;- ggplot(agregdata, aes(x=factor(agregdata$educ)))+
+geom_bar(fill=“steelblue”)+ labs(title=“Niveau d’éducation (avec
+diplôme) des individus de l’échantillon”, x=“Nombre d’années de
+scolarité et d’études (depuis le début de l’école primaire (4 ans))”, y
+= “Effectifs”)+ geom_text(stat=‘count’, aes(label=after_stat(count)),
+vjust=1.6, color=“white”, size=3.5)+ theme_minimal()</p>
+<p>#On ajoute les études supérieures à educ :</p>
+<p>agregdata<span class="math inline">\(educ &lt;-
+ifelse(agregdata\)</span>cw22o005==25, 17, #niveau licence =&gt; 18 ans
+d’études ifelse(agregdata<span class="math inline">\(cw22o005==26,
+19,  #niveau master, le master dure 1, 2 ou 3 ans =&gt; 17 + 2 = 19
+a.e.  ifelse(agregdata\)</span>cw22o005==27, 22.5, agregdata$educ)))
+#après le master, un doctorat dure 3 à 4 ans =&gt; 19 + 3.5 = 22.5
+a.e.</p>
+<p>###Création d’une table avec les données pertinentes</p>
+<p>data&lt;-data.frame(agregdata<span class="math inline">\(nomem_encr,agregdata\)</span>leeftijd,agregdata<span class="math inline">\(geslacht,agregdata\)</span>brutoink,agregdata<span class="math inline">\(cw22o127,agregdata\)</span>cw22o134,
+agregdata<span class="math inline">\(educ, agregdata\)</span>aantalki)
+names(data)&lt;-c(“identite”, “age”, “genre”, “revenu”, “heures”,
+“experience”,“education”, “nbenfants”)</p>
+<p>nrow(data) sum(is.na(data$nbenfants))</p>
+<p>data &lt;- data[!data<span class="math inline">\(revenu&lt;=0,] data
+&lt;- data[!is.na(data\)</span>heures),] data &lt;-
+data[!is.na(data<span class="math inline">\(experience),] data &lt;-
+data[!is.na(data\)</span>education),] data &lt;- data[!data<span class="math inline">\(experience==999,] data &lt;-
+data[!data\)</span>education==-9,] data &lt;- data[!data<span class="math inline">\(heures==999,] data &lt;-
+data[!data\)</span>genre==3,]</p>
+<p>###Réecriture des variables :</p>
+<p>data<span class="math inline">\(genre &lt;-
+ifelse(data\)</span>genre==1, 0, 1) data<span class="math inline">\(log_revenu &lt;- log(data\)</span>revenu)</p>
+<p>data<span class="math inline">\(experience &lt;- 2022 -
+data\)</span>experience</p>
+<p>lm1 &lt;- lm(data<span class="math inline">\(log_revenu ~
+data\)</span>age + data<span class="math inline">\(genre +
+data\)</span>heures + data<span class="math inline">\(experience +
+data\)</span>nbenfants + data$education) summary(lm1)</p>
+<p>nrow(data) sum(data<span class="math inline">\(education==0)
+sum(data\)</span>revenu&lt;0)</p>
+<p>#Vérification hétéroscédasticité :</p>
+<p>data<span class="math inline">\(uhat &lt;- lm1\)</span>residuals
+data<span class="math inline">\(yhat &lt;- lm1\)</span>fitted.values</p>
+<p>library(ggplot2) plot_hetero_fitted &lt;- ggplot(data = data, mapping
+= aes(x = yhat, y = uhat)) + theme_minimal(base_size = 32) +
+geom_point(col=‘steelblue’) + geom_hline(yintercept = 0, col = ‘red’) +
+labs(y = ‘Residuals’, x = ‘Fitted values’) ggsave(plot_hetero_fitted,
+filename = “figure/plot_hetero_fitted.pdf”, width=15, height=10)</p>
+<p>library(ggplot2) plot_hetero_educ &lt;- ggplot(data = data, mapping =
+aes(x = education, y = uhat)) + theme_minimal(base_size = 32) +
+geom_point(col=‘steelblue’) + geom_hline(yintercept = 0, col = ‘red’) +
+labs(y = ‘Residuals’, x = ‘éducation’) #La variance des résidus semble
+augmenter avec la variable education, ce qui peut s’expliquer #par le
+fait que les individus ayant + d’années d’études ont accès à des postes
+plus variés #donc on s’attend à ce que la variation du salaire soit plus
+forte pour les individus #ayant un niveau plus important d’éducation</p>
+<p>library(ggplot2) plot_hetero_heures &lt;- ggplot(data = data, mapping
+= aes(x = heures, y = uhat)) + theme_minimal(base_size = 32) +
+geom_point(col=‘steelblue’) + geom_hline(yintercept = 0, col = ‘red’) +
+labs(y = ‘Residuals’, x = ‘heures’) #variance des résidus très élevée
+pour variable heures faible #explication ?? Individus travaillant peu
+peuvent avoir autres #sources de revenu ? ggsave(plot_hetero_heures,
+filename = “figure/plot_hetero_heures.pdf”, width=15, height=10)</p>
+<p>data<span class="math inline">\(residuals1&lt;-lm1\)</span>residuals</p>
+<p>#On réalise d’abord le test de Breusch-Pagan en regardant si le
+modèle est globalement significatif avec un test de Fisher data<span class="math inline">\(ln_resi2&lt;-lm1\)</span>residuals^2
+ln_model_BP&lt;-lm(ln_resi2 ~ experience + genre + heures + age +
+nbenfants + education, data = data) summary(ln_model_BP) #la p-value
+étant très faible, on rejette l’hypothèse nulle d’homoscédasticité, donc
+on conclut à psce hétéroscédasticité</p>
+<p>#Puis avec un test du rapport de vraisemblance (d’abord méthode auto,
+puis méthode manuelle) library(lmtest) options( “digits”=1) bp &lt;-
+bptest(lm1) #idem, juste pour vérifier, même si les résultats différents
+(ici le test est basé sur student)</p>
+<p>k &lt;- 6 r2 &lt;- summary(ln_model_BP)$r.squared # R-squared n &lt;-
+nobs(ln_model_BP) # number of observations LM_stat &lt;- n * r2 #
+LM-statistic LM_pval &lt;- 1 - pchisq(q = LM_stat, df = k) # p-value
+LM_pval#mêmes résultats qu’avec méthode auto !! @</p>
+<p>Afin de vérifier la présence ou non d’hétéroscédasticité au sein de
+notre modèle, nous avons réalisé les deux variantes du test de
+Breusch-Pagan (avec un test de Fisher et avec un test du rapport de
+vraisemblance) ansi qu’un test de White. Tous concordent et corroborent
+la présence d’hétéroscédasticité, qui est par ailleurs observable
+graphiquement : la répartition des résidus en fonction des données
+prédites n’est pas homogène et l’on observe une forte variabilité de ces
+résidus en fonction de certaines variables du modèle, notamment la
+variable heures ( <span class="math inline">\(\ref{fig:hetero}\)</span>). Avec le test de
+Breusch-Pagan avec le rapport de vraisemblance, dont nous avons vérifié
+les résultats via la commande , nous obtenons une statistique de et une
+p.value de , qui nous permet de rejeter l’hypothèse nulle au seuil
+significatif de 0,01.</p>
+<p>Et ici on peut écrire … et insérer des blocs de code qui s’éxécutent,
+avec le code et le résultat qui s’affichent</p>
+<p>&lt;&lt;&gt;&gt;= a &lt;- 2+2 a</p>
+<p>@</p>
+<p>ou juste le résultat :</p>
+<p>&lt;&lt; echo=FALSE&gt;&gt;= b &lt;-3+3 b @</p>
+<p>ou totalement invisibles : &lt;&lt;echo=FALSE,
+results=“hide”&gt;&gt;= c &lt;- 4+4 c @</p>
+<p>Et ensuite on peut citer les résultats : à première vue <span class="math inline">\(\Sexpr{a} &lt; \Sexpr{b}\)</span> mais je crois
+que c’est qui est le plus grand.</p>
 <p>&lt;&lt; echo=FALSE, result=“hide”&gt;&gt;=</p>
 <p>agregdata<span class="math inline">\(educ2 &lt;-
 ifelse(agregdata\)</span>cw22o005==25, 17, #niveau licence =&gt; 18 ans
