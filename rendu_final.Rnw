@@ -212,12 +212,12 @@ plot_hetero_heures <- ggplot(data = data, mapping = aes(x = heures, y = uhat)) +
 ggsave(plot_hetero_heures, filename = "figure/plot_hetero_heures.pdf", width=15, height=10)
 @
 
-Afin de vérifier la présence ou non d’hétéroscédasticité au sein de notre modèle, nous avons réalisé les deux variantes du test de Breusch-Pagan (avec un test de Fisher et avec un test du rapport de vraisemblance) ansi qu’un test de White. Tous concordent et corroborent la présence d’hétéroscédasticité, qui est par ailleurs observable graphiquement : la répartition des résidus en fonction des données prédites n’est pas homogène et l’on observe une forte variabilité de ces résidus en fonction de certaines variables du modèle, notamment la variable heures \ref{fig:hetero}. 
+Afin de vérifier la présence ou non d’hétéroscédasticité au sein de notre modèle, nous avons réalisé les deux variantes du test de Breusch-Pagan (avec un test de Fisher et avec un test du rapport de vraisemblance) ansi qu’un test de White. Tous concordent et corroborent la présence d’hétéroscédasticité, qui est par ailleurs observable graphiquement : la répartition des résidus en fonction des données prédites n’est pas homogène et l’on observe une forte variabilité de ces résidus en fonction de certaines variables du modèle, notamment la variable heures (Figure \ref{fig:hetero}). 
 
 \begin{figure}[h]
 \center
-\includegraphics[width=0.4\linewidth]{figure/plot_hetero_fitted.pdf}
-\includegraphics[width=0.4\linewidth]{figure/plot_hetero_heures.pdf}
+\includegraphics[width=0.49\linewidth]{figure/plot_hetero_fitted.pdf}
+\includegraphics[width=0.49\linewidth]{figure/plot_hetero_heures.pdf}
 \caption{Répartition des résidus en fonction des valeurs prédites et de la variable heures\label{fig:hetero}}
 \end{figure}
 
