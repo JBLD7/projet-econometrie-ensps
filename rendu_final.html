@@ -361,7 +361,7 @@ coût-avantage microéconomique, qui conduit les individus à arbitrer
 entre le coût d’une année supplémentaire d’études et le gain espéré à
 long terme . Mincer, une décennie plus tard, a enrichi cette approche en
 incluant l’expérience accumulée au cours des années de travail dans le
-capital humain [a].</p>
+capital humain .</p>
 <p>Dans notre étude, nous tenterons de mesurer les effets de ces
 variables mais aussi d’autres paramètres, à l’instar du genre, de la
 présence d’enfants, mais aussi des heures travaillées ou de l’âge. Nous
@@ -378,7 +378,30 @@ littérature existante et discuterons aussi de ses limites.</p>
 <p>&lt;&lt;setup, eval= TRUE, include= FALSE, cache= FALSE, echo=
 FALSE&gt;&gt;= system (paste (“biber”, sub (“\.Rnw$”, ““,
 current_input()))) @</p>
-<p>Il faudra ici présenter le modèle.</p>
+<p>Nous avons sélectionné plusieurs variables au sein de l’enquête et de
+la base . La variable , issue d’un recoupement de plusieurs variables,
+correspond au nombre d’années de scolarité et d’études achevée
+(c’est-à-dire ayant conduit à l’obtention d’un diplôme), ses valeurs
+sont comprises entre 0 (personne n’étant jamais allée à l’école) à 22.5
+(personne titulaire d’un doctorat, sachant que la scolarité débute à
+l’âge de 4 ans aux Pays-Bas). La variable sépare la population en deux
+groupes : hommes et femmes, les autres identités de genre ayant été
+écartées et indique l’âge des enquêtés. La variable prend en compte le
+revenu brut mensuel autodéclaré, que nous avons préféré au revenu net,
+plus dépendant des politiques fiscales et de redistribution. La variable
+correspond au nombre d’heures de travail effectuées en moyenne chaque
+semaine tandis qu’ mesure l’ancienneté des salariés dans leur entreprise
+(en années). Enfin, indique le nombre d’enfants présents dans le
+foyer.</p>
+<p>Afin de vérifier la présence ou non d’hétéroscédasticité au sein de
+notre modèle, nous avons réalisé les deux variantes du test de
+Breusch-Pagan (avec un test de Fisher et avec un test du rapport de
+vraisemblance) ansi qu’un test de White. Tous concordent et corroborent
+la présence d’hétéroscédasticité, qui est par ailleurs observable
+graphiquement : la répartition des résidus en fonction des données
+prédites n’est pas homogène et l’on observe une forte variabilité de ces
+résidus en fonction de certaines variables du modèle, notamment la
+variable heures.</p>
 <p>Et ici on peut écrire … et insérer des blocs de code qui s’éxécutent,
 avec le code et le résultat qui s’affichent</p>
 <p>&lt;&lt;&gt;&gt;= a &lt;- 2+2 a</p>
@@ -482,7 +505,6 @@ data\)</span>nbenfants + data$education)</p>
 print(xtable(summary(lm1), caption=“Tableau des résidus”,
 label=“tb:lm1”), booktabs=TRUE, caption.placement=“top”) @</p>
 <p>\end{document}</p>
-<p>[a]c’est un test de commentaire</p>
 
 
 

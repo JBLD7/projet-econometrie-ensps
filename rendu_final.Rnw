@@ -38,7 +38,7 @@
 
 \section*{Introduction}
 
-Depuis Becker et sa théorie du capital humain en 1964, les travaux économiques visant à expliquer les différences de revenu entre les individus se sont multipliées. Becker a théorisé l’existence d’un calcul coût-avantage microéconomique, qui conduit les individus à arbitrer entre le coût d’une année supplémentaire d’études et le gain espéré à long terme \parencite{becker1964}. Mincer, une décennie plus tard, a enrichi cette approche en incluant l’expérience accumulée au cours des années de travail dans le capital humain \parencite{mincer1974}[a].
+Depuis Becker et sa théorie du capital humain en 1964, les travaux économiques visant à expliquer les différences de revenu entre les individus se sont multipliées. Becker a théorisé l’existence d’un calcul coût-avantage microéconomique, qui conduit les individus à arbitrer entre le coût d’une année supplémentaire d’études et le gain espéré à long terme \parencite{becker1964}. Mincer, une décennie plus tard, a enrichi cette approche en incluant l’expérience accumulée au cours des années de travail dans le capital humain \parencite{mincer1974}.
 
 Dans notre étude, nous tenterons de mesurer les effets de ces variables mais aussi d’autres paramètres, à l’instar du genre, de la présence d’enfants, mais aussi des heures travaillées ou de l’âge. Nous nous baserons sur deux enquêtes du LISS\footnote{\textit{Longitudinal Internet studies for the Social Sciences}, les questionnaires sont administrées par Centerdata} menées aux Pays-Bas respectivement en mai 2022 et en septembre 2022. Il s’agira, après une régression classique permettant de comprendre l’influence des différentes variables, de tester la présence d’hétéroscédasticité dans le modèle et, le cas échéant, de la corriger ; de mener un test de Chow pour tenter d'identifier d'éventuels effets de “paliers” quant au lien entre salaire et éducation ainsi que de discuter de la présence d’endogénéité dans le modèle et des moyens à notre disposition pour la corriger. Nous replacerons notre travail dans le contexte de la littérature existante et discuterons aussi de ses limites.
 
@@ -48,34 +48,12 @@ system (paste ("biber", sub ("\\.Rnw$", "", current_input())))
 
 \section{Présentation du modèle et de ses limites}
 
-Il faudra ici présenter le modèle. 
+\subsection{Présentation des variables utilisées}
 
-\section{Résultats principaux}
+Nous avons sélectionné plusieurs variables au sein de l’enquête \textit{Work and Schooling} et de la base \textit{Background variables}. La variable \verb+education+, issue d’un recoupement de plusieurs variables, correspond au nombre d’années de scolarité et d’études achevée (c’est-à-dire ayant conduit à l’obtention d’un diplôme), ses valeurs sont comprises entre 0 (personne n’étant jamais allée à l’école) à 22.5 (personne titulaire d’un doctorat, sachant que la scolarité débute à l’âge de 4 ans aux Pays-Bas). La variable \verb+genre+ sépare la population en deux groupes : hommes et femmes, les autres identités de genre ayant été écartées et \verb+age+ indique l’âge des enquêtés. La variable \verb+revenu+ prend en compte le revenu brut mensuel autodéclaré, que nous avons préféré au revenu net, plus dépendant des politiques fiscales et de redistribution. La variable \verb+heures+ correspond au nombre d’heures de travail effectuées en moyenne chaque semaine tandis qu’\verb+experience+ mesure l’ancienneté des salariés dans leur entreprise (en années). Enfin, \verb+nbenfants+ indique le nombre d’enfants présents dans le foyer. 
 
-\section{Analyse et mise en perspective des résultats}
+\subsection{Détection et correction de l’hétéroscédasticité}
 
-Et ici on peut écrire ... et insérer des blocs de code qui s'éxécutent, avec le code et le résultat qui s'affichent
-
-<<>>=
-a <-  2+2
-a
-
-@
-
-ou juste le résultat : 
-
-<< echo=FALSE>>=
-b <-3+3
-b
-@
-
-ou totalement invisibles : 
-<<echo=FALSE, results="hide">>=
-c <- 4+4
-c
-@
-
-Et ensuite on peut citer les résultats : à première vue $\Sexpr{a} < \Sexpr{b}$ mais je crois que c'est \Sexpr{c} qui est le plus grand.
 
 <<echo=FALSE, results="hide", warning=FALSE>>=
 setwd("~/projet-econometrie-ensps")
@@ -139,8 +117,139 @@ sum(agregdata$educ==18)
 sum((agregdata$cw22o005==27|agregdata$cw22o005==26|agregdata$cw22o005==25)&agregdata$educ!=17)#nombre d'observations "bizarres"
 #On considère que les réponses à la question cw22o005 sont plus fiables car plus précises.
 
+
+ploteduc <- ggplot(agregdata, aes(x=factor(agregdata$educ)))+
+  geom_bar(fill="steelblue")+
+  labs(title="Niveau d'éducation (avec diplôme) des individus de l'échantillon", 
+       x="Nombre d'années de scolarité et d'études (depuis le début de l'école primaire (4 ans))", y = "Effectifs")+
+  geom_text(stat='count', aes(label=after_stat(count)), vjust=1.6, color="white", size=3.5)+
+  theme_minimal()
+
+#On ajoute les études supérieures à educ :
+
+agregdata$educ <- ifelse(agregdata$cw22o005==25, 17,
+                         #niveau licence => 18 ans d'études
+                         ifelse(agregdata$cw22o005==26, 19,
+                                #niveau master, le master dure 1, 2 ou 3 ans => 17 + 2 = 19 a.e.
+                                ifelse(agregdata$cw22o005==27, 22.5, agregdata$educ))) #après le master, un doctorat dure 3 à 4 ans => 19 + 3.5 = 22.5 a.e.
+
+
+
+
+###Création d'une table avec les données pertinentes
+
+data<-data.frame(agregdata$nomem_encr,agregdata$leeftijd,agregdata$geslacht,agregdata$brutoink,agregdata$cw22o127,agregdata$cw22o134, agregdata$educ, agregdata$aantalki)
+names(data)<-c("identite", "age", "genre", "revenu", "heures", "experience","education", "nbenfants")
+
+nrow(data)
+sum(is.na(data$nbenfants))
+
+
+
+data <-  data[!data$revenu<=0,]
+data <- data[!is.na(data$heures),]
+data <- data[!is.na(data$experience),]
+data <- data[!is.na(data$education),]
+data <-  data[!data$experience==999,]
+data <-  data[!data$education==-9,]
+data <-  data[!data$heures==999,]
+data <-  data[!data$genre==3,]
+
+###Réecriture des variables : 
+
+data$genre <- ifelse(data$genre==1, 0, 1)
+data$log_revenu <- log(data$revenu)
+
+
+data$experience <- 2022 - data$experience
+
+
+lm1 <- lm(data$log_revenu ~ data$age + data$genre + data$heures + data$experience + data$nbenfants + data$education)
+summary(lm1)
+
+
+
+
+nrow(data)
+sum(data$education==0)
+sum(data$revenu<0)
+
+
+#Vérification hétéroscédasticité :
+
+data$uhat <- lm1$residuals
+data$yhat <- lm1$fitted.values
+
+library(ggplot2)
+plot_hetero_fitted <- ggplot(data = data, mapping = aes(x = yhat, y = uhat)) +
+  theme_minimal(base_size = 32) +
+  geom_point(col='steelblue') +
+  geom_hline(yintercept = 0, col = 'red') +
+  labs(y = 'Residuals', x = 'Fitted values')
+ggsave(plot_hetero_fitted, filename = "figure/plot_hetero_fitted.pdf", width=15, height=10)
+
+
+library(ggplot2)
+plot_hetero_educ <- ggplot(data = data, mapping = aes(x = education, y = uhat)) +
+  theme_minimal(base_size = 32) +
+  geom_point(col='steelblue') +
+  geom_hline(yintercept = 0, col = 'red') +
+  labs(y = 'Residuals', x = 'éducation')
+#La variance des résidus semble augmenter avec la variable education, ce qui peut s'expliquer
+#par le fait que les individus ayant + d'années d'études ont accès à des postes plus variés
+#donc on s'attend à ce que la variation du salaire soit plus forte pour les individus
+#ayant un niveau plus important d'éducation
+
+library(ggplot2)
+plot_hetero_heures <- ggplot(data = data, mapping = aes(x = heures, y = uhat)) +
+  theme_minimal(base_size = 32) +
+  geom_point(col='steelblue') +
+  geom_hline(yintercept = 0, col = 'red') +
+  labs(y = 'Residuals', x = 'heures')
+#variance des résidus très élevée pour variable heures faible
+#explication ?? Individus travaillant peu peuvent avoir autres
+#sources de revenu ?
+ggsave(plot_hetero_heures, filename = "figure/plot_hetero_heures.pdf", width=15, height=10)
 @
-Un petit graphique : 
+
+Afin de vérifier la présence ou non d’hétéroscédasticité au sein de notre modèle, nous avons réalisé les deux variantes du test de Breusch-Pagan (avec un test de Fisher et avec un test du rapport de vraisemblance) ansi qu’un test de White. Tous concordent et corroborent la présence d’hétéroscédasticité, qui est par ailleurs observable graphiquement : la répartition des résidus en fonction des données prédites n’est pas homogène et l’on observe une forte variabilité de ces résidus en fonction de certaines variables du modèle, notamment la variable heures \ref{fig:hetero}. 
+
+\begin{figure}[h]
+\center
+\includegraphics[width=0.4\linewidth]{figure/plot_hetero_fitted.pdf}
+\includegraphics[width=0.4\linewidth]{figure/plot_hetero_heures.pdf}
+\caption{Répartition des résidus en fonction des valeurs prédites et de la variable heures\label{fig:hetero}}
+\end{figure}
+
+\subsection{Détection de l’endogénéité et pistes de correction}
+
+\section{Résultats principaux}
+
+\section{Analyse et mise en perspective des résultats}
+
+Et ici on peut écrire ... et insérer des blocs de code qui s'éxécutent, avec le code et le résultat qui s'affichent
+
+<<>>=
+a <-  2+2
+a
+
+@
+
+ou juste le résultat : 
+
+<< echo=FALSE>>=
+b <-3+3
+b
+@
+
+ou totalement invisibles : 
+<<echo=FALSE, results="hide">>=
+c <- 4+4
+c
+@
+
+Et ensuite on peut citer les résultats : à première vue $\Sexpr{a} < \Sexpr{b}$ mais je crois que c'est \Sexpr{c} qui est le plus grand.
+
 
 << echo=FALSE, result="hide">>=
 
@@ -200,5 +309,3 @@ print(xtable(summary(lm1), caption="Tableau des résidus", label="tb:lm1"), book
 
 \printbibliography
 \end{document}
-
-[a]c'est un test de commentaire

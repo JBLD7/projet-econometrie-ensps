@@ -127,7 +127,7 @@ sum(data$revenu<0)
 #Vérification hétéroscédasticité :
 
 data$uhat <- lm1$residuals
-data$yhat <- lm1$fitted.value
+data$yhat <- lm1$fitted.values
 
 library(ggplot2)
 ggplot(data = data, mapping = aes(x = yhat, y = uhat)) +
@@ -136,20 +136,90 @@ ggplot(data = data, mapping = aes(x = yhat, y = uhat)) +
   geom_hline(yintercept = 0, col = 'red') +
   labs(y = 'Residuals', x = 'Fitted values')
 
+plot(data$uhat, data$yhat)
+
+library(ggplot2)
+ggplot(data = data, mapping = aes(x = education, y = uhat)) +
+  theme_bw() +
+  geom_point() +
+  geom_hline(yintercept = 0, col = 'red') +
+  labs(y = 'Residuals', x = 'éducation')
+#La variance des résidus semble augmenter avec la variable education, ce qui peut s'expliquer
+#par le fait que les individus ayant + d'années d'études ont accès à des postes plus variés
+#donc on s'attend à ce que la variation du salaire soit plus forte pour les individus
+#ayant un niveau plus important d'éducation
+
+library(ggplot2)
+ggplot(data = data, mapping = aes(x = heures, y = uhat)) +
+  theme_minimal() +
+  geom_point(col='steelblue') +
+  geom_hline(yintercept = 0, col = 'red') +
+  labs(y = 'Residuals', x = 'heures')
+#variance des résidus très élevée pour variable heures faible
+#explication ?? Individus travaillant peu peuvent avoir autres
+#sources de revenu ?
+
+plot(data$log_revenu,resid(lm1))
+
+plot(lm1)
+
 data$residuals1<-lm1$residuals
 data$residuals1
 sum(data$residuals1)
 
-data$ln_resi2<-data$residuals1*data$residuals1
-ln_model_BP<-lm(ln_resi2 ~ age + genre + heures + experience + nbenfants + education, data = data)
+#On réalise d'abord le test de Breusch-Pagan en regardant si le modèle est globalement significatif avec un test de Fisher
+data$ln_resi2<-lm1$residuals^2
+ln_model_BP<-lm(ln_resi2 ~ experience + genre + heures + age + nbenfants + education, data = data)
 summary(ln_model_BP) #la p-value étant très faible, on rejette l'hypothèse nulle d'homoscédasticité, donc on conclut à psce hétéroscédasticité
 
-
+#Puis avec un test du rapport de vraisemblance (d'abord méthode auto, puis méthode manuelle)
 library(lmtest)
-bptest(lm1, studentize=FALSE) #idem, juste pour vérifier
+bptest(lm1) #idem, juste pour vérifier, même si les résultats différents (ici le test est basé sur student)
+
+k <-  6
+r2 <- summary(ln_model_BP)$r.squared # R-squared
+n <- nobs(ln_model_BP) # number of observations
+LM_stat <- n * r2 # LM-statistic
+LM_pval <- 1 - pchisq(q = LM_stat, df = k) # p-value
+LM_pval#mêmes résultats qu'avec méthode auto !!
+
+###Méthode de white
+
+#Méthode manuelle
+
+data$experience2 <- data$experience*data$experience
+data$age2 <- data$age*data$age
+data$heures2 <- data$heures*data$heures
+data$genre2 <- data$genre^2
+data$education2 <-  data$education^2
+data$nbenfants2 <-  data$nbenfants^2
 
 
-#méthode de white
+data$var_crois_1 <- data$experience*data$age
+data$var_crois_2 <- data$experience*data$genre
+data$var_crois_3 <- data$experience*data$heures
+data$var_crois_4 <- data$experience*data$nbenfants
+data$var_crois_5 <- data$experience*data$education
+data$var_crois_6 <- data$genre*data$heures
+data$var_crois_7 <- data$genre*data$age
+data$var_crois_8 <- data$genre*data$nbenfants
+data$var_crois_9 <- data$genre*data$education
+data$var_crois_10 <- data$heures*data$age
+data$var_crois_11 <- data$heures*data$nbenfants
+data$var_crois_12 <- data$heures*data$education
+data$var_crois_13 <- data$age*data$nbenfants
+data$var_crois_14 <- data$age*data$education
+data$var_crois_15 <- data$nbenfants*data$education
+
+# Regression pour le test de White 
+model_White <- lm(ln_resi2 ~ experience + genre + heures + age + nbenfants + education +
+                    var_crois_1 + var_crois_2 + var_crois_3 + var_crois_4 + var_crois_5 + var_crois_6 +
+                    var_crois_7 + var_crois_8 + var_crois_9 + var_crois_10 + var_crois_11 + var_crois_12+
+                    var_crois_13 + var_crois_14 + var_crois_15 + experience2 + education2 + nbenfants2 +
+                    genre2 + heures2 + age2, 
+                  data)
+summary(model_White)
+#le test de white manuel est lui aussi significatif
 
 modele <- lm(data$log_revenu ~ data$age + data$genre + data$heures + data$experience + data$nbenfants + data$education)
 smodele <- summary(modele)
@@ -319,3 +389,4 @@ summary(ivreg(log_revenu ~ experience | age, data = data))
 
 modele_iv <- ivreg(log_revenu ~ education + genre + heures + nbenfants |experience|age, data = data) 
 summary(modele_iv, diagnostics = TRUE)
+

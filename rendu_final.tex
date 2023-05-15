@@ -88,7 +88,7 @@
 
 \section*{Introduction}
 
-Depuis Becker et sa théorie du capital humain en 1964, les travaux économiques visant à expliquer les différences de revenu entre les individus se sont multipliées. Becker a théorisé l’existence d’un calcul coût-avantage microéconomique, qui conduit les individus à arbitrer entre le coût d’une année supplémentaire d’études et le gain espéré à long terme \parencite{becker1964}. Mincer, une décennie plus tard, a enrichi cette approche en incluant l’expérience accumulée au cours des années de travail dans le capital humain \parencite{mincer1974}[a].
+Depuis Becker et sa théorie du capital humain en 1964, les travaux économiques visant à expliquer les différences de revenu entre les individus se sont multipliées. Becker a théorisé l’existence d’un calcul coût-avantage microéconomique, qui conduit les individus à arbitrer entre le coût d’une année supplémentaire d’études et le gain espéré à long terme \parencite{becker1964}. Mincer, une décennie plus tard, a enrichi cette approche en incluant l’expérience accumulée au cours des années de travail dans le capital humain \parencite{mincer1974}.
 
 Dans notre étude, nous tenterons de mesurer les effets de ces variables mais aussi d’autres paramètres, à l’instar du genre, de la présence d’enfants, mais aussi des heures travaillées ou de l’âge. Nous nous baserons sur deux enquêtes du LISS\footnote{\textit{Longitudinal Internet studies for the Social Sciences}, les questionnaires sont administrées par Centerdata} menées aux Pays-Bas respectivement en mai 2022 et en septembre 2022. Il s’agira, après une régression classique permettant de comprendre l’influence des différentes variables, de tester la présence d’hétéroscédasticité dans le modèle et, le cas échéant, de la corriger ; de mener un test de Chow pour tenter d'identifier d'éventuels effets de “paliers” quant au lien entre salaire et éducation ainsi que de discuter de la présence d’endogénéité dans le modèle et des moyens à notre disposition pour la corriger. Nous replacerons notre travail dans le contexte de la littérature existante et discuterons aussi de ses limites.
 
@@ -96,7 +96,25 @@ Dans notre étude, nous tenterons de mesurer les effets de ces variables mais au
 
 \section{Présentation du modèle et de ses limites}
 
-Il faudra ici présenter le modèle. 
+\subsection{Présentation des variables utilisées}
+
+Nous avons sélectionné plusieurs variables au sein de l’enquête \textit{Work and Schooling} et de la base \textit{Background variables}. La variable \verb+education+, issue d’un recoupement de plusieurs variables, correspond au nombre d’années de scolarité et d’études achevée (c’est-à-dire ayant conduit à l’obtention d’un diplôme), ses valeurs sont comprises entre 0 (personne n’étant jamais allée à l’école) à 22.5 (personne titulaire d’un doctorat, sachant que la scolarité débute à l’âge de 4 ans aux Pays-Bas). La variable \verb+genre+ sépare la population en deux groupes : hommes et femmes, les autres identités de genre ayant été écartées et \verb+age+ indique l’âge des enquêtés. La variable \verb+revenu+ prend en compte le revenu brut mensuel autodéclaré, que nous avons préféré au revenu net, plus dépendant des politiques fiscales et de redistribution. La variable \verb+heures+ correspond au nombre d’heures de travail effectuées en moyenne chaque semaine tandis qu’\verb+experience+ mesure l’ancienneté des salariés dans leur entreprise (en années). Enfin, \verb+nbenfants+ indique le nombre d’enfants présents dans le foyer. 
+
+\subsection{Détection et correction de l’hétéroscédasticité}
+
+
+
+
+Afin de vérifier la présence ou non d’hétéroscédasticité au sein de notre modèle, nous avons réalisé les deux variantes du test de Breusch-Pagan (avec un test de Fisher et avec un test du rapport de vraisemblance) ansi qu’un test de White. Tous concordent et corroborent la présence d’hétéroscédasticité, qui est par ailleurs observable graphiquement : la répartition des résidus en fonction des données prédites n’est pas homogène et l’on observe une forte variabilité de ces résidus en fonction de certaines variables du modèle, notamment la variable heures \ref{fig:hetero}. 
+
+\begin{figure}[h]
+\center
+\includegraphics[width=0.4\linewidth]{figure/plot_hetero_fitted.pdf}
+\includegraphics[width=0.4\linewidth]{figure/plot_hetero_heures.pdf}
+\caption{Répartition des résidus en fonction des valeurs prédites et de la variable heures\label{fig:hetero}}
+\end{figure}
+
+\subsection{Détection de l’endogénéité et pistes de correction}
 
 \section{Résultats principaux}
 
@@ -132,8 +150,6 @@ ou totalement invisibles :
 Et ensuite on peut citer les résultats : à première vue $4 < 6$ mais je crois que c'est 8 qui est le plus grand.
 
 
-Un petit graphique : 
-
 
 
 \begin{figure}[h]
@@ -152,7 +168,7 @@ Un petit graphique :
 \end{knitrout}
 
 % latex table generated in R 4.2.1 by xtable 1.8-4 package
-% Sun May 14 22:00:30 2023
+% Mon May 15 04:17:51 2023
 \begin{table}[ht]
 \centering
 \caption{Tableau des résidus} 
@@ -161,13 +177,13 @@ Un petit graphique :
   \toprule
  & Estimate & Std. Error & t value & Pr($>$$|$t$|$) \\ 
   \midrule
-(Intercept) & 5.6786 & 0.1095 & 51.84 & 0.0000 \\ 
-  data\$age & 0.0072 & 0.0010 & 7.11 & 0.0000 \\ 
-  data\$genre & -0.3039 & 0.0225 & -13.53 & 0.0000 \\ 
-  data\$heures & 0.0142 & 0.0008 & 17.03 & 0.0000 \\ 
-  data\$experience & 0.0024 & 0.0011 & 2.15 & 0.0316 \\ 
-  data\$nbenfants & -0.0097 & 0.0096 & -1.01 & 0.3112 \\ 
-  data\$education & 0.1083 & 0.0059 & 18.44 & 0.0000 \\ 
+(Intercept) & 5.8617 & 0.0959 & 61.13 & 0.0000 \\ 
+  data\$age & 0.0078 & 0.0010 & 7.77 & 0.0000 \\ 
+  data\$genre & -0.3036 & 0.0222 & -13.70 & 0.0000 \\ 
+  data\$heures & 0.0140 & 0.0008 & 17.01 & 0.0000 \\ 
+  data\$experience & 0.0030 & 0.0011 & 2.65 & 0.0081 \\ 
+  data\$nbenfants & -0.0072 & 0.0095 & -0.76 & 0.4483 \\ 
+  data\$education & 0.0922 & 0.0046 & 19.93 & 0.0000 \\ 
    \bottomrule
 \end{tabular}
 \end{table}
@@ -175,5 +191,3 @@ Un petit graphique :
 
 \printbibliography
 \end{document}
-
-[a]c'est un test de commentaire
