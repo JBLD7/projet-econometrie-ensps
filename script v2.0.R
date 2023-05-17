@@ -87,7 +87,7 @@ ggplot(agregdata, aes(x=factor(agregdata$educ)))+
 ###Création d'une table avec les données pertinentes
 
 data<-data.frame(agregdata$nomem_encr,agregdata$leeftijd,agregdata$geslacht,agregdata$brutoink,agregdata$cw22o127,agregdata$cw22o134, agregdata$educ, agregdata$aantalki)
-names(data)<-c("identite", "age", "genre", "revenu", "heures", "experience","education", "nbenfants")
+names(data)<-c("identite", "age", "genre", "revenu", "heures", "anciennete","education", "nbenfants")
 
 nrow(data)
 sum(is.na(data$nbenfants))
@@ -96,9 +96,9 @@ sum(is.na(data$nbenfants))
 
 data <-  data[!data$revenu<=0,]
 data <- data[!is.na(data$heures),]
-data <- data[!is.na(data$experience),]
+data <- data[!is.na(data$anciennete),]
 data <- data[!is.na(data$education),]
-data <-  data[!data$experience==999,]
+data <-  data[!data$anciennete==999,]
 data <-  data[!data$education==-9,]
 data <-  data[!data$heures==999,]
 data <-  data[!data$genre==3,]
@@ -109,10 +109,10 @@ data$genre <- ifelse(data$genre==1, 0, 1)
 data$log_revenu <- log(data$revenu)
 
 
-data$experience <- 2022 - data$experience
+data$anciennete <- 2022 - data$anciennete
 
 
-lm1 <- lm(data$log_revenu ~ data$age + data$genre + data$heures + data$experience + data$nbenfants + data$education)
+lm1 <- lm(data$log_revenu ~ data$age + data$genre + data$heures + data$anciennete + data$nbenfants + data$education)
 summary(lm1)
 
 
@@ -169,7 +169,7 @@ sum(data$residuals1)
 
 #On réalise d'abord le test de Breusch-Pagan en regardant si le modèle est globalement significatif avec un test de Fisher
 data$ln_resi2<-lm1$residuals^2
-ln_model_BP<-lm(ln_resi2 ~ experience + genre + heures + age + nbenfants + education, data = data)
+ln_model_BP<-lm(ln_resi2 ~ anciennete + genre + heures + age + nbenfants + education, data = data)
 summary(ln_model_BP) #la p-value étant très faible, on rejette l'hypothèse nulle d'homoscédasticité, donc on conclut à psce hétéroscédasticité
 
 #Puis avec un test du rapport de vraisemblance (d'abord méthode auto, puis méthode manuelle)
@@ -187,7 +187,7 @@ LM_pval#mêmes résultats qu'avec méthode auto !!
 
 #Méthode manuelle
 
-data$experience2 <- data$experience*data$experience
+data$anciennete2 <- data$anciennete*data$anciennete
 data$age2 <- data$age*data$age
 data$heures2 <- data$heures*data$heures
 data$genre2 <- data$genre^2
@@ -195,11 +195,11 @@ data$education2 <-  data$education^2
 data$nbenfants2 <-  data$nbenfants^2
 
 
-data$var_crois_1 <- data$experience*data$age
-data$var_crois_2 <- data$experience*data$genre
-data$var_crois_3 <- data$experience*data$heures
-data$var_crois_4 <- data$experience*data$nbenfants
-data$var_crois_5 <- data$experience*data$education
+data$var_crois_1 <- data$anciennete*data$age
+data$var_crois_2 <- data$anciennete*data$genre
+data$var_crois_3 <- data$anciennete*data$heures
+data$var_crois_4 <- data$anciennete*data$nbenfants
+data$var_crois_5 <- data$anciennete*data$education
 data$var_crois_6 <- data$genre*data$heures
 data$var_crois_7 <- data$genre*data$age
 data$var_crois_8 <- data$genre*data$nbenfants
@@ -212,22 +212,23 @@ data$var_crois_14 <- data$age*data$education
 data$var_crois_15 <- data$nbenfants*data$education
 
 # Regression pour le test de White 
-model_White <- lm(ln_resi2 ~ experience + genre + heures + age + nbenfants + education +
+model_White <- lm(ln_resi2 ~ anciennete + genre + heures + age + nbenfants + education +
                     var_crois_1 + var_crois_2 + var_crois_3 + var_crois_4 + var_crois_5 + var_crois_6 +
                     var_crois_7 + var_crois_8 + var_crois_9 + var_crois_10 + var_crois_11 + var_crois_12+
-                    var_crois_13 + var_crois_14 + var_crois_15 + experience2 + education2 + nbenfants2 +
+                    var_crois_13 + var_crois_14 + var_crois_15 + anciennete2 + education2 + nbenfants2 +
                     genre2 + heures2 + age2, 
                   data)
 summary(model_White)
 #p value très faible, mais la statistique l'est aussi, il y a normalement 28 degrés de liberté donc on ne rejette pas l'hypotèse nulle 
 
-modele <- lm(data$log_revenu ~ data$age + data$genre + data$heures + data$experience + data$nbenfants + data$education)
+modele <- lm(data$log_revenu ~ data$age + data$genre + data$heures + data$anciennete + data$nbenfants + data$education)
 smodele <- summary(modele)
 library(lmtest)
 library(sandwich)
 
 modele_robust <- coeftest(modele, vcov = vcovHC(modele, type = "HC1"))
 modele_robust
+summary(modele_robust)
 
 library(lmtest)
 library(car)
@@ -237,15 +238,19 @@ confint(modele_robust)
 
 #méthode de white (méthode 2, paquet + récent)
 library(estimatr)
-modele_robust3 <- lm_robust(data=data,log_revenu ~ age + genre + heures + experience + nbenfants + education, se_type = "HC1")
+library(dplyr)
+modele_robust3 <- lm_robust(data=data,log_revenu ~ age + genre + heures + anciennete + nbenfants + education, se_type = "HC1")
 summary(modele_robust3)
+model <-  modele_robust3
+
+
 
 #méthode des moindres carrés généralisée
-#modele <- lm(data$log_revenu ~ data$age + data$genre + data$heures + data$experience + data$nbenfants + data$education)
+#modele <- lm(data$log_revenu ~ data$age + data$genre + data$heures + data$anciennete + data$nbenfants + data$education)
 #data$logresid2 <- log(residuals(modele)^2) # on ajoute la variable ln(e^2)
-#modeleresid <- lm(data=data,logresid2 ~ age + genre + heures + experience + nbenfants + education) # on les régresse sur les x
+#modeleresid <- lm(data=data,logresid2 ~ age + genre + heures + anciennete + nbenfants + education) # on les régresse sur les x
 #data$e2chap <- exp(modeleresid$fitted.values) # on calcule la variance prédite
-#modele_mcqg <- lm(data=data,log_revenu ~ age + genre + heures + experience + nbenfants + education,weight=1/e2chap) # on pondère la régression par 1/variance
+#modele_mcqg <- lm(data=data,log_revenu ~ age + genre + heures + anciennete + nbenfants + education,weight=1/e2chap) # on pondère la régression par 1/variance
 #summary(modele_mcqg)
 
 
@@ -308,16 +313,16 @@ nrow(dt1)
 summary(dt1$education)
 summary(dt2$education)
 
-p_1 <-lm(log_revenu ~ age + genre + heures + experience + nbenfants + education, data = dt1)
+p_1 <-lm(log_revenu ~ age + genre + heures + anciennete + nbenfants + education, data = dt1)
 p_1
 
-p_2 <-lm(log_revenu ~ age + genre + heures + experience + nbenfants + education, data = dt2)
+p_2 <-lm(log_revenu ~ age + genre + heures + anciennete + nbenfants + education, data = dt2)
 p_2
 
 summary(p_1)
 summary(p_2)
 
-p <- lm(log_revenu ~ age + genre + heures + experience + nbenfants + education, data = data)
+p <- lm(log_revenu ~ age + genre + heures + anciennete + nbenfants + education, data = data)
 
 stat_de_test <- ((sum(p$residuals^2) - ( sum(p_1$residuals^2) + sum(p_2$residuals^2)))/7)/(( sum(p_1$residuals^2) + sum(p_2$residuals^2))/(nrow(data) - 14))
 stat_de_test
@@ -331,7 +336,7 @@ sum(data$education<16)
 
 
 library(strucchange)
-sctest(log_revenu ~ age + genre + heures + experience + nbenfants + education, type="Chow", point=sum(data$education<16), data=data[order(data$education),])
+sctest(log_revenu ~ age + genre + heures + anciennete + nbenfants + education, type="Chow", point=sum(data$education<16), data=data[order(data$education),])
 
 nrow(data)
 
@@ -347,18 +352,18 @@ ggplot(data, aes(x = age, y = log_revenu)) +
 
 #Relation entre l'âge (variable instrumentale) et l'expéience  (variable endogène)
 library(ggplot2)
-ggplot(data, aes(x = age, y = experience)) + 
+ggplot(data, aes(x = age, y = anciennete)) + 
   geom_smooth(method = "lm", col="darkred") +
   geom_point(col="steelblue", size=3)
 
-lm3 <- lm(experience ~ age, data = data)
+lm3 <- lm(anciennete ~ age, data = data)
 
 data$pred1 <- lm3$fitted.values
 
 summary(lm3) 
 #l'âge a un effet positif (bien qu'assez faiblement significatif) sur l'expérience
 
-lm4 <- lm(experience ~ age + genre + heures + nbenfants + education, data = data)
+lm4 <- lm(anciennete ~ age + genre + heures + nbenfants + education, data = data)
 
 data$pred2 <- lm4$fitted.values
 
@@ -385,8 +390,55 @@ summary(lm(log_revenu ~ pred2 + genre + heures + nbenfants + education, data = d
 
 library(AER)
 
-summary(ivreg(log_revenu ~ experience | age, data = data))
+summary(ivreg(log_revenu ~ anciennete | age, data = data))
 
-modele_iv <- ivreg(log_revenu ~ education + genre + heures + nbenfants |experience|age, data = data) 
+modele_iv <- ivreg(log_revenu ~ education + genre + heures + nbenfants |anciennete|age, data = data) 
 summary(modele_iv, diagnostics = TRUE)
+
+
+
+
+
+
+library(strucchange)
+sctest(log_revenu ~ age + genre + heures + anciennete + nbenfants + education, type="Chow", point=sum(data$education<16), data=data[order(data$education),])
+
+lm1 <-  lm(log_revenu ~ age + genre + heures + anciennete + nbenfants + education, data[data$education<16,])
+summary(lm1)
+lm2 <-  lm(log_revenu ~ age + genre + heures + anciennete + nbenfants + education, data[data$education>16,])
+summary(lm2)
+library(xtable)
+
+library(ggplot2)
+ggplot(data[data$education<16,], aes(x = nbenfants, y = anciennete)) + 
+  geom_smooth(method = "lm", col="darkred") +
+  geom_point(col="steelblue", size=3)
+
+library(ggplot2)
+ggplot(data[data$education>16,], aes(x = nbenfants, y = anciennete)) + 
+  geom_smooth(method = "lm", col="darkred") +
+  geom_point(col="steelblue", size=3)
+
+library(ggplot2)
+ggplot(data = data, mapping = aes(x = education, y = uhat)) +
+  theme_minimal(base_size = 32) +
+  geom_point(col='steelblue') +
+  geom_hline(yintercept = 0, col = 'red') +
+  labs(y = 'Residuals', x = 'éducation')
+#La variance des résidus semble augmenter avec la variable education, ce qui peut s'expliquer
+#par le fait que les individus ayant + d'années d'études ont accès à des postes plus variés
+#donc on s'attend à ce que la variation du salaire soit plus forte pour les individus
+#ayant un niveau plus important d'éducation
+
+
+library(ggplot2)
+ggplot(data = data, mapping = aes(x = heures, y = uhat)) +
+  theme_minimal(base_size = 32) +
+  geom_point(col='steelblue') +
+  geom_qq(aes(sample=data$uhat))+
+  labs(y = 'Residuals', x = 'heures')
+#variance des résidus très élevée pour variable heures faible
+#explication ?? Individus travaillant peu peuvent avoir autres
+#sources de revenu ?
+
 

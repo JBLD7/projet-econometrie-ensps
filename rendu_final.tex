@@ -69,6 +69,7 @@
 \usepackage{enumitem}
 \usepackage{array}% dans le préambule
 \setlength{\extrarowheight}{0,1cm}
+\usepackage{amsmath}
 
 \newcounter{rownumbers}
 \newcommand\rownumber{\stepcounter{rownumbers}\arabic{rownumbers}}
@@ -107,7 +108,7 @@ Dans notre étude, nous tenterons de mesurer les effets de ces variables mais au
 
 \subsection{Présentation des variables utilisées}
 
-Nous avons sélectionné plusieurs variables au sein de l’enquête \textit{Work and Schooling} et de la base \textit{Background variables}. La variable \verb+education+, issue d’un recoupement de plusieurs variables, correspond au nombre d’années de scolarité et d’études achevée (c’est-à-dire ayant conduit à l’obtention d’un diplôme), ses valeurs sont comprises entre 0 (personne n’étant jamais allée à l’école) à 22.5 (personne titulaire d’un doctorat, sachant que la scolarité débute à l’âge de 4 ans aux Pays-Bas). La variable \verb+genre+ sépare la population en deux groupes : hommes et femmes, les autres identités de genre ayant été écartées car très peu nombreuses et ayant été jugées difficilement interprétables et \verb+age+ indique l’âge des enquêtés. La variable \verb+revenu+ prend en compte le revenu brut mensuel autodéclaré, que nous avons préféré au revenu net, plus dépendant des politiques fiscales et de redistribution. La variable \verb+heures+ correspond au nombre d’heures de travail effectuées en moyenne chaque semaine tandis qu’\verb+experience+ mesure l’ancienneté des salariés dans leur entreprise (en années) ; il est à noter qu’un licenciement ou une démission remet ce compteur d’expérience à zéro puisque c’est l’expérience dans l’entreprise actuelle. Enfin, \verb+nbenfants+ indique le nombre d’enfants présents dans le foyer. 
+Nous avons sélectionné plusieurs variables au sein de l’enquête \textit{Work and Schooling} et de la base \textit{Background variables}. La variable \verb+éducation+, issue d’un recoupement de plusieurs variables, correspond au nombre d’années de scolarité et d’études achevée (c’est-à-dire ayant conduit à l’obtention d’un diplôme), ses valeurs sont comprises entre 0 (personne n’étant jamais allée à l’école) à 22.5 (personne titulaire d’un doctorat, sachant que la scolarité débute à l’âge de 4 ans aux Pays-Bas). La variable \verb+genre+ sépare la population en deux groupes : hommes et femmes, les autres identités de genre ayant été écartées car très peu nombreuses et ayant été jugées difficilement interprétables et \verb+age+ indique l’âge des enquêtés. La variable \verb+revenu+ prend en compte le revenu brut mensuel autodéclaré, que nous avons préféré au revenu net, plus dépendant des politiques fiscales et de redistribution. La variable \verb+heures+ correspond au nombre d’heures de travail effectuées en moyenne chaque semaine tandis qu’\verb+ancienneté+ mesure l’ancienneté des salariés dans leur entreprise (en années) ; il est à noter qu’un licenciement ou une démission remet ce compteur d’ancienneté à zéro puisque c’est l’ancienneté dans l’entreprise actuelle. Enfin, \verb+nbenfants+ indique le nombre d’enfants présents dans le foyer. 
 
 \subsection{Détection et correction de l’hétéroscédasticité}
 
@@ -121,7 +122,7 @@ Afin de vérifier la présence ou non d’hétéroscédasticité au sein de notr
 \center
 \includegraphics[width=0.49\linewidth]{figure/plot_hetero_fitted.pdf}
 \includegraphics[width=0.49\linewidth]{figure/plot_hetero_heures.pdf}
-\caption{Répartition des résidus\label{fig:hetero}}
+\caption{Répartition des résidus avant toute correction\label{fig:hetero}}
 \end{figure}
 
 
@@ -131,7 +132,7 @@ Nous avons corrigé l'hétéroscédasticité en utilisant la méthode de white (
 \begin{figure}[h]
 \center
 \includegraphics[width=0.7\linewidth]{figure/hetero_correct.pdf}
-\caption{Répartition des résidus en fonction des valeurs prédites\label{fig:hetero_correct}}
+\caption{Répartition des résidus en fonction des valeurs prédites, après correction de l'hétéroscédasticité\label{fig:hetero_correct}}
 \end{figure}
 
 
@@ -143,29 +144,30 @@ Nous avons corrigé l'hétéroscédasticité en utilisant la méthode de white (
 \subsection{Analyse et discussion des paramètres}
 
 % latex table generated in R 4.2.1 by xtable 1.8-4 package
-% Mon May 15 22:00:44 2023
+% Tue May 16 21:29:42 2023
 \begin{table}[ht]
 \centering
-\caption{Tableau des résidus} 
+\caption{Paramètres estimés du modèle (hétéroscédasticité corrigée)} 
 \label{tb:lm1}
 \begin{tabular}{rrrrr}
   \toprule
  & Estimate & Std. Error & t value & Pr($>$$|$t$|$) \\ 
   \midrule
-(Intercept) & 5.8617 & 0.0959 & 61.13 & 0.0000 \\ 
-  data\$age & 0.0078 & 0.0010 & 7.77 & 0.0000 \\ 
-  data\$genre & -0.3036 & 0.0222 & -13.70 & 0.0000 \\ 
-  data\$heures & 0.0140 & 0.0008 & 17.01 & 0.0000 \\ 
-  data\$experience & 0.0030 & 0.0011 & 2.65 & 0.0081 \\ 
-  data\$nbenfants & -0.0072 & 0.0095 & -0.76 & 0.4483 \\ 
-  data\$education & 0.0922 & 0.0046 & 19.93 & 0.0000 \\ 
+(Intercept) & 5.8617 & 0.1255 & 46.6890 & 0.0000 \\ 
+  age & 0.0078 & 0.0012 & 6.7330 & 0.0000 \\ 
+  genre & -0.3036 & 0.0223 & -13.6003 & 0.0000 \\ 
+  heures & 0.0140 & 0.0011 & 13.0212 & 0.0000 \\ 
+  anciennete & 0.0030 & 0.0011 & 2.7550 & 0.0059 \\ 
+  nbenfants & -0.0072 & 0.0108 & -0.6637 & 0.5070 \\ 
+  education & 0.0922 & 0.0062 & 14.9240 & 0.0000 \\ 
    \bottomrule
 \end{tabular}
 \end{table}
 
 
-Nous avons tout d’abord préféré effectuer une analyse en log-niveau, le log limitant les risques d’hétéroscédasticité en “écrasant” les observations sans les fausser. À première vue, les paramètres de nos 6 régresseurs de base sur la variable expliqués paraissent plutôt cohérents à ce qui est observé dans la littérature, comme le montre le tableau \ref{tb:lm1}, l’âge a une influence positive mais assez négligeable (paramètre de 0,008), le genre a une forte influence négative sur le salaire pour les femmes. Les heures de travail ont évidemment une influence positive forte : 1 heure travaillée en plus par semaine augmente, d’environ 0,14\% le log du revenu (voir figure \ref{fig:heureslogrevenu}).
 
+
+Nous avons tout d’abord préféré effectuer une analyse en log-niveau, le log limitant les risques d’hétéroscédasticité en \enquote{écrasant} les observations sans les fausser. À première vue, les paramètres de nos 6 régresseurs de base sur la variable expliqués paraissent plutôt cohérents à ce qui est observé dans la littérature, comme le montre le tableau \ref{tb:lm1}, l’âge a une influence positive mais assez négligeable (paramètre de 0,008), le genre a une forte influence négative sur le salaire pour les femmes. Les heures de travail ont évidemment une influence positive forte : 1 heure travaillée en plus par semaine augmente d’environ 1,4\% le log du revenu (voir figure \ref{fig:heureslogrevenu}).
 
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
@@ -180,61 +182,97 @@ Nous avons tout d’abord préféré effectuer une analyse en log-niveau, le log
 \caption{Log revenu en fonction du nombre d'heures de travail\label{fig:heureslogrevenu}}
 \end{figure}
 
-L’expérience joue enfin positivement mais faible, le nombre d’enfants négativement mais faiblement, et l’éducation enfin est la variable qui joue le plus fortement avec le nombre d’heures travaillées, avec un paramètre de 0,09. Fait notable, le nombre d’enfants semble assez peu significatif, cette variable étant la seule dans notre régression initiale avec une p-value supérieure à 0,05 (pour atteindre 0,45).
-        Les données du LISS semblent donc confirmer à première vue ce que la littérature a déjà pointé du doigt : une différence structurelle de salaire (brut ici) entre hommes et femmes, une influence positive de l’éducation, de l’expérience, de l’âge… Ayant souhaité nous concentrer plus particulièrement sur l’effet de l’éducation, nous avons cependant souhaité vérifier l’existence d'effets de seuils de l’éducation sur la salaire au moment de l’obtention de diplôme. Nous allons désormais évoquer les résultats d’un test de Chow effectué sur l’éducation. 
+L’ancienneté joue enfin positivement mais faible, le nombre d’enfants négativement mais faiblement, et l’éducation enfin est la variable qui joue le plus fortement avec le nombre d’heures travaillées, avec un paramètre de 0,09. Fait notable, le nombre d’enfants semble assez peu significatif, cette variable étant la seule dans notre régression initiale avec une p-value supérieure à 0,05 (pour atteindre 0,45).
+        Les données du LISS semblent donc confirmer à première vue ce que la littérature a déjà pointé du doigt : une différence structurelle de salaire (brut ici) entre hommes et femmes, une influence positive de l’éducation, de l’ancienneté, de l’âge… Ayant souhaité nous concentrer plus particulièrement sur l’effet de l’éducation, nous avons cependant souhaité vérifier l’existence d'effets de seuils de l’éducation sur la salaire au moment de l’obtention de diplôme. Nous allons désormais évoquer les résultats d’un test de Chow effectué sur l’éducation. 
+
+\subsection{Test de chow sur la variable \texttt{éducation}}
+
+
+
+
+L’intérêt de cette partie est d’identifier un éventuel niveau d’études qui fait rupture dans le modèle en menant un test de Chow sur la variable \texttt{éducation}. Nous avons décidé de tester l’existence d’un changement structurel dans notre modèle au-delà de 16 ans d’études. Il s’agit de savoir si notre modèle est stable au sein de deux sous-populations, qui se distinguent par la durée de leur scolarité et de leurs études. Notons qu’ici peu importe que l’égalité soit stricte ou pas, étant donné qu’\texttt{éducation} n’est pas continue. Formellement, en écrivant notre modèle comme suit :
+
+\[Y = \beta_1X_1 + \beta_2X_2 + \dots + \beta_6X_6\] 
+
+\noindent où $\beta_i$ est le coefficient associé au régresseur $X_i$, nous testons l'hypothèse nulle $H_0$ contre l'hypothèse alternative $H_1$ :
+
+
+\[\begin{cases} H_0 &: \forall i=1, \dots, 6, \quad\beta_{i_{\texttt{\tiny éducation}<16}}=\beta_{i_{\texttt{\tiny éducation}>16} }= \beta_i \\ H_1 &: \exists i=1,\dots,6\ / \quad \beta_i\neq \beta_{i_{\texttt{\tiny éducation}<16}} \text{ ou } \beta_i\neq\beta_{i_{\texttt{\tiny éducation}>16} } \end{cases}\]
+
+
+
+Avec $\beta_{i_{\texttt{\tiny éducation}<16} }$ les coefficients du régresseur $X_i$ pour la sous-population la moins diplômée. Les effectifs de nos deux sous-populations sont de tailles suffisantes (1076 personnes d'un côté (les plus diplômés) et 831 personnes de l'autre). Le test (réalisé manuellement, puis confirmé avec la commande \texttt{sctest()}) nous donne une statitique de 12.2 et une p-value de \ensuremath{2.6\times 10^{-15}}, nous pouvons donc conclure à l'existence d'un changement structurel dans la relation entre nos régresseurs et le log revenu entre l'échantillon des moins diplômés et celui des plus diplômés. Pour analyser plus finement ce changement, examinons les tableaux des paramètres estimés pour nos deux sous-groupes : 
+
+\begin{table*}[htbp]
+\captionof{table}{\centering Paramètres estimés du modèle pour les sous-groupes des moins diplômés (à gauche) et des plus diplômés (à droite)}
+   \begin{minipage}[t]{0.4\linewidth}
+   {\tiny
+      \centering
+\begin{tabular}{rrrrr}
+  \toprule
+ & Estimate & Std. Error & t value & Pr($>$$|$t$|$) \\ 
+  \midrule
+(Intercept) & 6.5637 & 0.1422 & 46.1515 & 0.0000 \\ 
+  age & 0.0047 & 0.0015 & 3.1557 & 0.0017 \\ 
+  genre & -0.3778 & 0.0336 & -11.2534 & 0.0000 \\ 
+  heures & 0.0137 & 0.0012 & 11.3171 & 0.0000 \\ 
+  experience & 0.0055 & 0.0015 & 3.6817 & 0.0002 \\ 
+  nbenfants & -0.0334 & 0.0140 & -2.3833 & 0.0174 \\ 
+  education & 0.0512 & 0.0082 & 6.2682 & 0.0000 \\ 
+   \bottomrule
+\end{tabular}}
+   \end{minipage}
+   \hspace{2cm}
+   \begin{minipage}[t]{0.4\linewidth}
+   {\tiny
+      \centering
+\begin{tabular}{rrrr}
+  \toprule
+Estimate & Std. Error & t value & Pr($>$$|$t$|$) \\ 
+  \midrule
+6.2337 & 0.2089 & 29.8446 & 0.0000 \\ 
+0.0106 & 0.0013 & 7.9129 & 0.0000 \\ 
+-0.2523 & 0.0288 & -8.7473 & 0.0000 \\ 
+0.0138 & 0.0011 & 12.5308 & 0.0000 \\ 
+0.0003 & 0.0016 & 0.2059 & 0.8369 \\ 
+0.0169 & 0.0126 & 1.3477 & 0.1781 \\ 
+0.0660 & 0.0109 & 6.0709 & 0.0000 \\ 
+   \bottomrule
+\end{tabular}}
+   \end{minipage}
+   \hfill
+\end{table*}
+
+En quelques mots, on remarque que l'effet du genre sur le est bien plus faible chez les plus diplômés, ce qui peut s'expliquer par des règles plus strictes pour encadrer les salaires (fonction publique) et pas une plus grande part de femmes au sein des métiers occupés par les plus diplômés, chaque année d'éducation est également légèrement plus valorisée pour les plus diplômés, de même que l'âge. On note également une rupture au niveau des effets du nombre d'enfants : si la variable joue négativement chez les moins diplômés (chaque enfant en plus fait baisser le salaire de 3,3\%), à l'inverse elle joue positivement chez les plus diplômés (chaque enfant augmente le salaire de 1,7\%).
 
 \section{Analyse et mise en perspective des résultats}
 
 \subsection{Endogénéité et utilisation de variables instrumentales}
 
-        Une discussion sur la possible présence d’endogénéité dans notre modèle s’impose. Premièrement la variable “éducation” au travers du nombre d’années d’éducation n’est pas exogène. Comme Becker l’avait déjà pointé, tous les individus n’effectuent pas les mêmes choix d’éducation car tous n’ont pas les mêmes ressources pour assumer leurs choix. Une année supplémentaire d’études représente un investissement financier dépendant des ressources à disposition. Par conséquent, au travers du nombre d’années d’étude, c’est probablement également le revenu des parents qui peut se lire. En parallèle, soulignons l’importance et l’influence du parcours scolaire des parents sur celui de leurs enfants, notamment lorsque les parents ont effectué des études supérieures. Des parents diplômés pousseront certainement leurs enfants à faire plus d’études. Une deuxième variable inconnue jouant sur le nombre d’années d’éducation et l’influence sur le salaire indirectement serait donc les ressources disponibles pour l’individu à différents moments de ses études mais aussi le parcours scolaire de ses parents.
-        Deuxièmement, l’expérience est évidemment également endogène. Le coefficient de corrélation entre l’âge et l’expérience dans l’entreprise est de 0,52, le plus élevé de tous les coefficients entre variables (soulignons que l’expérience est mesurée comme expérience avec son employeur actuel, une période de chômage remettant cette variable à zéro). Un individu jeune, de 25 ans par exemple, ne pourra évidemment pas accumuler une dizaine d’années d’expérience et au travers de l’expérience, l’âge influe durablement. L’âge est quant à lui une variable exogène par excellence ; à partir de là, prendre l’âge comme variable instrumentale pour corriger l’endogénéité associée à l’expérience pourrait être une option intéressante à tester. Une deuxième source d’endogénéité pesant sur l’expérience serait intéressante à étudier : celle de la formation continue. Ici, la variable éducation se contente d’étudier la durée des études de l’individu, mais qu’en est-il pour ceux qui effectuent, au sein de leur entreprise, une formation complémentaire pour monter en grade ? Ou qui, du fait d’une reconversion professionnelle, effectuent une formation une fois sorti des bancs de l’école ? Un individu avec beaucoup d’expérience a d’autant plus de chances, au cours de ses années passées avec son même employeur, d’avoir effectué une formation complémentaire qui n’est pas prise en compte dans l’éducation mais joue pourtant sur le salaire au travers de l’expérience (nous faisons ici la supposition qu’un individu avec le même employeur depuis longtemps tend statistiquement à plus réaliser de formation en continu, le lien entre stabilité de l’emploi et propension à faire des formations étant confirmé empiriquement).
-
-
-
-Et ici on peut écrire ... et insérer des blocs de code qui s'éxécutent, avec le code et le résultat qui s'affichent
+        Une discussion sur la possible présence d’endogénéité dans notre modèle s’impose, dans la mesure où certaines de nos variables, à l'instar d'\texttt{éducation}, ne sont pas exogènes. Si l'on suit l'analyse de Becker, les choix d'éducation --- la poursuite des études, qui représente un investissement financier, ou leur arrêt, qui permet d'entrer sur le marché du travail --- dépendent des ressources des individus. Par conséquent, le nombre d'années d'études dépend au moins pour partie du revenu des parents. Soulignons également l’importance et l’influence du parcours scolaire des parents sur celui de leurs enfants: des parents diplômés pourront inciter leurs enfants à faire des études plus longues, mais surtout les aider (aide aux devoirs notamment). Malheureusement, nous ne disposons d'aucune information ni sur les ressources des parents ni sur leur niveau d'études, qui auraient pu faire des variables instrumentales appropriées. 
 
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
-\begin{alltt}
-\hlstd{a} \hlkwb{<-}  \hlnum{2}\hlopt{+}\hlnum{2}
-\hlstd{a}
-\end{alltt}
-\begin{verbatim}
-## [1] 4
-\end{verbatim}
-\end{kframe}
+
+
+{\ttfamily\noindent\itshape\color{messagecolor}{\#\# `geom\_smooth()` using formula = 'y \textasciitilde{} x'}}\end{kframe}
 \end{knitrout}
 
-ou juste le résultat : 
+\begin{figure}[h]
+\center
+\includegraphics[width=0.7\linewidth]{figure/exp_age.pdf}
+\caption{Ancienneté de l'entreprise en fonction de l'âge\label{fig:exp_age}}
+\end{figure}
 
-\begin{knitrout}
-\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
-\begin{verbatim}
-## [1] 6
-\end{verbatim}
-\end{kframe}
-\end{knitrout}
+        Autre variable endogène : l'\texttt{ancienneté}. Le coefficient de corrélation entre l’âge et l’ancienneté dans l’entreprise est de 0,52, le plus élevé de tous (c.f. le graphique \ref{fig:exp_age}). Soulignons qu'un changement d'employeur remet cette valeur à 0. Un individu jeune, de 25 ans par exemple, ne pourra évidemment pas accumuler une dizaine d’années d’ancienneté. L’âge est quant à lui une variable exogène par excellence ; à partir de là, prendre l’âge comme variable instrumentale pour corriger l’endogénéité associée à l’ancienneté pourrait être une option intéressante à tester. Une deuxième source d’endogénéité pesant sur l’ancienneté serait intéressante à étudier : celle de la formation continue. Ici, la variable éducation se contente d’étudier la durée des études de l’individu, mais qu’en est-il pour ceux qui effectuent, au sein de leur entreprise, une formation complémentaire pour monter en grade ? Ou qui, du fait d’une reconversion professionnelle, effectuent une formation une fois sortis des bancs de l’école ? Un individu avec beaucoup d’ancienneté a d’autant plus de chances, au cours de ses années passées avec son même employeur, d’avoir effectué une formation complémentaire qui n’est pas prise en compte dans l’éducation mais joue pourtant sur le salaire au travers de l’ancienneté (nous faisons ici la supposition qu’un individu avec le même employeur depuis longtemps tend statistiquement à plus réaliser de formation en continu, le lien entre stabilité de l’emploi et propension à faire des formations étant confirmé empiriquement).
 
-ou totalement invisibles : 
+\subsection{Limites et inscription dans la littérature existante}
 
-
-Et ensuite on peut citer les résultats : à première vue $4 < 6$ mais je crois que c'est 8 qui est le plus grand.
-
-
-
-
-
-\begin{knitrout}
-\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
-\begin{verbatim}
-## [1] 5615
-## [1] 0
-\end{verbatim}
-\end{kframe}
-\end{knitrout}
-
-
+        Plusieurs limites peuvent évidemment être pointées du doigt quant au modèle utilisé, au choix des variables et à la méthodologie. Nous avons fait le choix d’utiliser des données en coupe instantanée, c’est-à-dire pour une seule période. Mais comme le mettent en avant S. Lollivier et P. Pollet, les coupes instantanées sont risquées puisqu’elles peuvent ne pas prendre en compte des phénomènes conjoncturels affectant les données \parencite{lollivier2003}. Comment interpréter par exemple une crise économique ou une vague de licenciements massifs ? Ou une nouvelle loi sur le temps de travail ? Pour nos données datant de 2022, ce pourrait être la guerre en Ukraine qui influerait sur certains secteurs et emplois comme choc non pris en compte dans des coupes instantanées. Concernant l’évolution de l’influence de certaines variables explicatives, l'étude réalisée par D. Witkowska sur les déterminants des salaires en Pologne de 2001 à 2009 est exemplaire. Elle y montre montre qu'entre 2001 et 2009, l'écart entre la part de la rémunération imputable aux études chez les personnes ayant été à l'université d'une part et d'autre part chez celles et ceux s’étant arrêté avant \textit{(general secondary} ou \textit{post secondary)} tend à se réduire : le paramètre pour les individus ayant été jusqu’à l’université était 4 fois plus élevé en 2001 que ceux s’étant arrêté au lycée ; en 2009 le rapport n’était plus que de 2 \parencite{witkowska2014}. Précisons que ceci ne signifie pas que les individus ayant été à l’université gagnent 2 fois plus, d’une part le salaire est en log et d’autre part cela représente seulement les différences de salaire imputables à l’éducation). Nos données en coupe instantanée ne permettent pas de mesurer de telles évolutions. 
+        
+          Les deux auteurs recommandent aussi, dans leur papier, de prendre en compte non seulement le revenu, mais également les opportunités d’emploi et le fait de ne pas se retrouver au chômage dans l’analyse : des formations différentes donnent, selon eux, des accès et opportunités différentes d’accès à l’emploi qui ne sont pas pleinement retranscrites par le biais du salaire. Pour un même salaire, des individus dans des branches différentes d’emploi peuvent avoir une certitude tout à fait différente quant à la stabilité de leur poste ou des possibilités d’embauche à la sortie, ce qui serait un complément intéressant à l’analyse de Becker et pourrait être pris en compte par une variable telle que le nombre des périodes de chômage ou encore une variable associant à un secteur du monde du travail la probabilité de se retrouver au chômage.
+          Une autre critique pourrait être faite quant aux choix de nos variables, somme toute pertinentes mais auxquelles nous aurions pu en ajouter d’autres. Ainsi le papier de D. Witkowska prend également en compte le lieu de résidence (urbain, rural, nombre d’habitants), le type de contrat ou encore la taille de l’entreprise. Nous avons tenté d’inclure plus de variables (notamment concernant la question du lieu de vie et de la possession d’une maison/appartement ou bien sa location) mais cela nécessitait la fusion d’autres enquêtes du LISS et nous descendions rapidement à un nombre trop restreint d’observations.
+         Somme toute notre modèle ne remet pas en question l’abondante littérature à ce sujet, il s’inscrit dans leur droite ligne quant aux résultats que nous pouvons en tirer. Ce qui ressort est plutôt la possibilité d’usage d’autres variables, d’autres méthodes et données pour obtenir des résultats plus fins et cette fois, peut être pouvoir nuancer et se distinguer de la littérature déjà existante.
 
 \printbibliography
 
@@ -292,6 +330,7 @@ Valeur d'origine & Valeur de remplacement \\
 \hline
 \end{tabular}}
 \end{minipage}
+\vspace{0,3cm}
 
 À l'issue du codage, on obtient la répartition suivante : 
 
@@ -317,9 +356,9 @@ Issue de la variable \texttt{brutoink} du questionnaire \textit{Background varia
 
 Il s'agit de la variable \texttt{cw22o127} du questionnaire \textit{Work and schooling}, qui correspond à la question : \enquote{How many hours per week do you work on average? / How many hours per week did you work on average?}, que nous avons reprise telle quelle. Les valeurs s'échelonnent de 0 à 80 heures hebdomadaires, avec une médiane égale à 36 heures.
 
-\subsection{La variable \texttt{experience}}
+\subsection{La variable \texttt{ancienneté}}
 
-Issue du questionnaire \textit{Work and schooling} (variable \texttt{cw22o134}), il s'agit de la réponse à la question : \enquote{In which year did you enter into employment with your current employer?}. Nous n'avons appliqué aucun traitement particulier aux observations, en dehors de la suppression des \textit{NA}.Les valeurs vont de 0 à 58 ans d'ancienneté, avec une médiane à 7 ans et une moyenne à 12 années d'ancienneté. 
+Issue du questionnaire \textit{Work and schooling} (variable \texttt{cw22o134}), il s'agit de la réponse à la question : \enquote{In which year did you enter into employment with your current employer?}. Nous n'avons appliqué aucun traitement particulier aux observations, en dehors de la suppression des \textit{NA}. Les valeurs vont de 0 à 58 ans d'ancienneté, avec une médiane à 7 ans et une moyenne à 12 années d'ancienneté. 
 
 \subsection{La variable \texttt{nbenfants}}
 
