@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.4.24)  16 MAY 2023 21:29
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.4.24)  19 MAY 2023 00:15
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -973,111 +973,101 @@ LaTeX Font Info:    Font shape `T1/zi4/m/n' will be
 {/usr/local/texlive/2023/texmf-var/fonts/map/pdftex/updmap/pdftex.map}{/usr/loc
 al/texlive/2023/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc}{/usr/local/texlive/202
 3/texmf-dist/fonts/enc/dvips/inconsolata/i4-t1-0.enc}]
-<figure/plot_hetero_fitted.pdf, id=102, 1084.05pt x 722.7pt>
+<figure/plot_hetero_fitted.pdf, id=105, 1084.05pt x 722.7pt>
 File: figure/plot_hetero_fitted.pdf Graphic file (type pdf)
 <use figure/plot_hetero_fitted.pdf>
-Package pdftex.def Info: figure/plot_hetero_fitted.pdf  used on input line 123.
+Package pdftex.def Info: figure/plot_hetero_fitted.pdf  used on input line 119.
 
 (pdftex.def)             Requested size: 204.9466pt x 136.63072pt.
-<figure/plot_hetero_heures.pdf, id=103, 1084.05pt x 722.7pt>
+<figure/plot_hetero_heures.pdf, id=106, 1084.05pt x 722.7pt>
 File: figure/plot_hetero_heures.pdf Graphic file (type pdf)
 <use figure/plot_hetero_heures.pdf>
-Package pdftex.def Info: figure/plot_hetero_heures.pdf  used on input line 124.
+Package pdftex.def Info: figure/plot_hetero_heures.pdf  used on input line 120.
 
 (pdftex.def)             Requested size: 204.9466pt x 136.63072pt.
-<figure/hetero_correct.pdf, id=105, 1084.05pt x 722.7pt>
+<figure/hetero_correct.pdf, id=108, 1084.05pt x 722.7pt>
 File: figure/hetero_correct.pdf Graphic file (type pdf)
 <use figure/hetero_correct.pdf>
-Package pdftex.def Info: figure/hetero_correct.pdf  used on input line 134.
+Package pdftex.def Info: figure/hetero_correct.pdf  used on input line 132.
 (pdftex.def)             Requested size: 292.77629pt x 195.18674pt.
-
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
+ [2{/usr/local/texlive/2023/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc}{/usr/local
+/texlive/2023/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc}{/usr/local/texlive/2
+023/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc} <./figure/plot_hetero_fitted.p
+df> <./figure/plot_hetero_heures.pdf> <./figure/hetero_correct.pdf>]
+<figure/exp_age.pdf, id=137, 1084.05pt x 722.7pt>
+File: figure/exp_age.pdf Graphic file (type pdf)
+<use figure/exp_age.pdf>
+Package pdftex.def Info: figure/exp_age.pdf  used on input line 147.
+(pdftex.def)             Requested size: 292.77629pt x 195.18674pt.
+ [3 <./figure/exp_age.pdf>]
 
 LaTeX Font Warning: Font shape `T1/zi4/m/it' undefined
-(Font)              using `T1/zi4/m/n' instead on input line 176.
+(Font)              using `T1/zi4/m/n' instead on input line 193.
 
-[2{/usr/local/texlive/2023/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc}{/usr/local/
-texlive/2023/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc}{/usr/local/texlive/20
-23/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc} <./figure/plot_hetero_fitted.pd
-f> <./figure/plot_hetero_heures.pdf>]
-<figure/heures_logrevenu.pdf, id=131, 1084.05pt x 722.7pt>
+<figure/heures_logrevenu.pdf, id=155, 1084.05pt x 722.7pt>
 File: figure/heures_logrevenu.pdf Graphic file (type pdf)
 <use figure/heures_logrevenu.pdf>
-Package pdftex.def Info: figure/heures_logrevenu.pdf  used on input line 181.
+Package pdftex.def Info: figure/heures_logrevenu.pdf  used on input line 198.
 (pdftex.def)             Requested size: 292.77629pt x 195.18674pt.
-
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
+[4 <./figure/heures_logrevenu.pdf>]
 LaTeX Font Info:    Font shape `T1/zi4/b/n' will be
-(Font)              scaled to size 12.0pt on input line 188.
-[3 <./figure/hetero_correct.pdf>]
+(Font)              scaled to size 12.0pt on input line 205.
 LaTeX Font Info:    Font shape `T1/zi4/m/n' will be
-(Font)              scaled to size 6.0pt on input line 200.
+(Font)              scaled to size 6.0pt on input line 215.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <5> on input line 211.
+(Font)              <5> on input line 226.
 
-Overfull \hbox (42.49033pt too wide) in paragraph at lines 211--224
+Overfull \hbox (42.49033pt too wide) in paragraph at lines 226--239
 [][] 
  []
 
-[4{/usr/local/texlive/2023/texmf-dist/fonts/enc/dvips/lm/lm-mathex.enc} <./figu
-re/heures_logrevenu.pdf>]
-LaTeX Font Info:    Font shape `T1/zi4/m/it' will be
-(Font)              scaled to size 10.95pt on input line 258.
-<figure/exp_age.pdf, id=161, 1084.05pt x 722.7pt>
-File: figure/exp_age.pdf Graphic file (type pdf)
-<use figure/exp_age.pdf>
-Package pdftex.def Info: figure/exp_age.pdf  used on input line 263.
-(pdftex.def)             Requested size: 292.77629pt x 195.18674pt.
- [5 <./figure/exp_age.pdf>] [6]
+[5{/usr/local/texlive/2023/texmf-dist/fonts/enc/dvips/lm/lm-mathex.enc}]
+[6]
 LaTeX Font Info:    Font shape `T1/zi4/m/n' will be
-(Font)              scaled to size 9.0pt on input line 295.
+(Font)              scaled to size 9.0pt on input line 283.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <9> on input line 298.
-
-Underfull \hbox (badness 4686) in paragraph at lines 304--304
+(Font)              <9> on input line 283.
+ [7]
+Underfull \hbox (badness 4686) in paragraph at lines 312--312
 []|\T1/lmr/m/n/9 3. ha-vo/vwo (hi-gher se-con-dary edu-
  []
 
 
-Overfull \hbox (24.0pt too wide) in paragraph at lines 298--313
+Overfull \hbox (24.0pt too wide) in paragraph at lines 306--321
 [][] 
  []
 
 
-Overfull \hbox (24.0pt too wide) in paragraph at lines 323--332
+Overfull \hbox (24.0pt too wide) in paragraph at lines 331--340
 [][] 
  []
 
-<figure/educ.pdf, id=186, 1084.05pt x 722.7pt>
+<figure/educ.pdf, id=202, 1084.05pt x 722.7pt>
 File: figure/educ.pdf Graphic file (type pdf)
 <use figure/educ.pdf>
-Package pdftex.def Info: figure/educ.pdf  used on input line 339.
+Package pdftex.def Info: figure/educ.pdf  used on input line 347.
 (pdftex.def)             Requested size: 292.77629pt x 195.18674pt.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[7] [8 <./figure/educ.pdf>] (./rendu_final.aux)
+[8] [9 <./figure/educ.pdf>] (./rendu_final.aux)
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
 Package rerunfilecheck Info: File `rendu_final.out' has not changed.
-(rerunfilecheck)             Checksum: 63C7E182DF6C39C18D2D176C8027EC88;4359.
+(rerunfilecheck)             Checksum: 1C93D2E6E6EA806595683F4C08DC04CE;4713.
 Package logreq Info: Writing requests to 'rendu_final.run.xml'.
 \openout1 = `rendu_final.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 24033 strings out of 476001
- 419368 string characters out of 5789199
- 1868074 words of memory out of 5000000
- 44144 multiletter control sequences out of 15000+600000
+ 24043 strings out of 476001
+ 419487 string characters out of 5789199
+ 1872074 words of memory out of 5000000
+ 44150 multiletter control sequences out of 15000+600000
  581028 words of font info for 72 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 75i,12n,76p,1933b,1765s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 75i,12n,76p,2022b,1765s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/local/texlive/2023/texmf-dist/fonts/type1/public/inconsolata/Inconsolat
 a-zi4b.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/inconsolata/I
 nconsolata-zi4r.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/lm/l
@@ -1095,10 +1085,10 @@ cal/texlive/2023/texmf-dist/fonts/type1/public/lm/lmr9.pfb></usr/local/texlive/
 /type1/public/lm/lmsy10.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/pub
 lic/lm/lmsy6.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/lm/lmsy
 8.pfb>
-Output written on rendu_final.pdf (8 pages, 837596 bytes).
+Output written on rendu_final.pdf (9 pages, 844061 bytes).
 PDF statistics:
- 302 PDF objects out of 1000 (max. 8388607)
- 238 compressed objects within 3 object streams
- 42 named destinations out of 1000 (max. 500000)
- 183 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 318 PDF objects out of 1000 (max. 8388607)
+ 253 compressed objects within 3 object streams
+ 46 named destinations out of 1000 (max. 500000)
+ 191 words of extra memory for PDF output out of 10000 (max. 10000000)
 
