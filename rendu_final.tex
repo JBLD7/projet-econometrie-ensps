@@ -142,26 +142,25 @@ Nous avons corrigé l'hétéroscédasticité en utilisant la méthode de white (
 
  Une discussion sur la possible présence d’endogénéité dans notre modèle s’impose, dans la mesure où certaines de nos variables, à l'instar d'\texttt{éducation}, ne sont pas exogènes. Si l'on suit l'analyse de Becker, les choix d'éducation --- la poursuite des études, qui représente un investissement financier, ou leur arrêt, qui permet d'entrer sur le marché du travail --- dépendent des ressources des individus. Par conséquent, le nombre d'années d'études dépend au moins pour partie du revenu des parents. Soulignons également l’importance et l’influence du parcours scolaire des parents sur celui de leurs enfants: des parents diplômés pourront inciter leurs enfants à faire des études plus longues, mais surtout les aider (aide aux devoirs notamment). Ce caractère endogène de l'éducation (que l'on pourrait nommer formation initiale) est montré par S. Lollivier et P. Pollet, qui précisent que cette endogénéité conduit, dans leur modèle, \enquote{à majorer d’environ 50 \% l’impact de la formation initiale sur le salaire, ce qui conduit à un gain moyen apparent d’environ 12 \% pour une année d’études supplémentaire contre 8 \% dans l’équation standard} \parencite{lollivier2003}. Malheureusement, nous ne disposions dans notre base de données d'aucune information, ni sur les ressources des parents ni sur leur niveau d'études, qui auraient pu faire des variables instrumentales appropriées. 
  
- \begin{figure}[h]
+
+
+
+
+\begin{figure}[h]
 \center
 \includegraphics[width=0.7\linewidth]{figure/exp_age.pdf}
 \caption{Ancienneté de l'entreprise en fonction de l'âge\label{fig:exp_age}}
 \end{figure}
- 
-Il nous semble également que l'\texttt{ancienneté} constitue, dans notre modèle, une variable endogène, dans la mesure où elle dépend fortement --- entre autres --- de l'âge (voir graphique~\ref{fig:exp_age}). Un individu jeune, de 25 ans par exemple, ne pourra évidemment pas accumuler une dizaine d’années d’ancienneté. Cependant, nous ne sommes pas parvenus à trouver une variable instrumentale appropriée dans notre base de données. Nous avons envisagé de contrôler par la variable \texttt{âge}, avant d'y renoncer, parce qu'il nous est impossible de justifier que l'effet de l'âge a un effet sur le revenu uniquement par l'intermédiaire de l'ancienneté dans l'entreprise. Il est au contraire légitime de supposer qu'au-delà de la seule ancienneté --- entendue comme nombre d'années au service de son employeur actuel ---, c'est l'expérience professionnelle ---  par exemple le nombre d'années de travail toutes entreprises confondues --- qui a un impact sur le revenu. C'est d'ailleurs une des limites de notre modèle de ne pas disposer d'une telle variable : en l'absence de variables permettant d'estimer l'expérience des individus, nous n'avons pu que considérer d'une part leur âge et d'autre part leur ancienneté. Enfin, l'effet de l'âge sur le revenu pourrait également être lié à un effet de génération, dans la mesure où certains travailleurs ont pu entrer sur le marché du travail dans un contexte économique plus ou moins favorable, ce qui a pu avoir une influence, à court et à long terme, sur leurs rémunérations. 
 
-
-
-
-
-
+Il nous semble également que l'\texttt{ancienneté} constitue, dans notre modèle, une variable endogène, dans la mesure où elle dépend fortement --- entre autres --- de l'âge. Un individu jeune, de 25 ans par exemple, ne pourra évidemment pas accumuler une dizaine d’années d’ancienneté (voir le graphique~\ref{fig:exp_age}). Cependant, nous ne sommes pas parvenus à trouver une variable instrumentale appropriée dans notre base de données. Nous avons envisagé de contrôler par la variable \texttt{âge}, avant d'y renoncer, parce qu'il nous est impossible de justifier que l'effet de l'âge a un effet sur le revenu uniquement par l'intermédiaire de l'ancienneté dans l'entreprise. Il est au contraire légitime de supposer qu'au-delà de la seule ancienneté --- entendue comme nombre d'années au service de son employeur actuel ---, c'est l'expérience professionnelle ---  par exemple le nombre d'années de travail toutes entreprises confondues --- qui a un impact sur le revenu. C'est d'ailleurs une des limites de notre modèle de ne pas disposer d'une telle variable : en l'absence de variables permettant d'estimer l'expérience des individus, nous n'avons pu que considérer d'une part leur âge et d'autre part leur ancienneté. Enfin, l'effet de l'âge sur le revenu pourrait également être lié à un effet de génération, dans la mesure où certains travailleurs ont pu entrer sur le marché du travail dans un contexte économique plus ou moins favorable, ce qui a pu avoir une influence, à court et à long terme, sur leurs rémunérations. 
+        
 
 \section{Résultats principaux}
 
 \subsection{Analyse et discussion des paramètres}
 
 % latex table generated in R 4.2.1 by xtable 1.8-4 package
-% Fri May 19 00:09:34 2023
+% Fri May 19 11:32:45 2023
 \begin{table}[ht]
 \centering
 \caption{Paramètres estimés du modèle (hétéroscédasticité corrigée)} 
@@ -262,11 +261,9 @@ En quelques mots, on remarque à la lecture du tableau~\ref{tab:chow} que l'effe
 
 \section{Mise en perspective des résultats et pistes de prolongement}
 
-\subsection{Un modèle aux ambitions limitées : la coupe instantanée}
+\subsection{Un modèle aux ambitions limitées}
 
 Une première limite tient au choix d’utiliser des données en coupe instantanée : notre modèle se borne donc à rendre compte d'une situation à un moment donné sans préjuger de ses évolutions ni passées ni futures. Or comme le soulignent S. Lollivier et P. Pollet, les données issues de coupes instantanées peuvent être affectées par des phénomènes conjoncturels, sans qu'il soit possible d'en déterminer les effets, ce qui restreint la portée de l'analyse \parencite{lollivier2003}. Comment interpréter par exemple une crise économique ou une vague de licenciements massifs ? Ou une nouvelle loi sur le temps de travail ? Pour nos données (qui datent de 2022), ce pourrait être la guerre en Ukraine qui influerait sur certains secteurs, en poussant à la hausse ou à la baisse les salaires. Mais au-delà, les données en coupe instantanée ne permettent pas de mesurer l'évolution de l'influence de certaines variables explicatives, ce qui permet pourtant de dégager des dynamiques de long terme.   L'étude réalisée par D. Witkowska sur les déterminants des salaires en Pologne de 2001 à 2009 est à cet égard exemplaire. Elle y montre montre qu'entre 2001 et 2009, l'écart entre la part de la rémunération imputable aux études chez les personnes ayant été à l'université d'une part et d'autre part chez celles et ceux s’étant arrêté avant \textit{(general secondary} ou \textit{post secondary)} tend à se réduire : le paramètre pour les individus ayant été jusqu’à l’université était 4 fois plus élevé en 2001 que ceux s’étant arrêté au lycée ; en 2009 le rapport n’était plus que de 2 \parencite[p. 206]{witkowska2014} (précisons que ceci ne signifie pas que les individus ayant été à l’université gagnent deux fois plus que les autres, d’une part le salaire est en log et d’autre part cela représente seulement les différences de salaire imputables à l’éducation).
-
-\subsection{Régresseurs retenus et d'autres variables pertinentes}
 
 Une autre limite tient au faible nombre de variables explicatives, qui sont pour certaines incomplètes. Il serait préférable de considérer l'expérience plutôt que l'ancienneté, et le modèle y gagnerait certainement, mais nous ne disposions pas d'une telle variable. Un autre facteur intéressant aurait pu être l'existence de périodes de chômage mais aussi de découpler salaire et autres revenus (autrement dit, revenus du travail et revenus du capital).  D'autres variables auraient pu être envisagées, telles que le type de contrat ou encore la taille de l'entreprises, qu'utilise D. Witkowska dans son article, mais à nouveau se posait le problème des contraintes induites par notre base de données. Néanmoins, nous avons effectué en amont un travail de présélection des variables, qui nous a conduit à éliminer celles qui n'étaient pas suffisament significatives. Il aurait été intéressant de présenter ici les résultats de la régression, mais il était nécessaire d'écarter ces variables, sauf à voir la taille de l'échantillon diminuer trop fortement. Sans plus de détails, nous pouvons mentionner quelques unes de ces variables peu significatives : le travail en soirée ou de nuit ; le lieu de résidence (rural ou urbain) ; le fait d'avoir posé récemment des congés ; l'état de santé ; la présence d'enfants de moins de huit ans ; la situation matrimoniale.  
 
@@ -280,9 +277,17 @@ Ceci rejoint les propos de S. Lollivier et P. Pollet qui recommandent de prendre
 
 \section*{Conclusion}
          
-         Notre contribution, qui vient en grande partie corroborer des résultats précédemment établis ouvre néanmoins la voie à des axes de recherche originaux. S'il ne s'agit certes que d'un instantané, d'une présentation de l'influence de différents paramètres sur le salaire brut à un moment donné, certains résultats de notre modèle n'en sont pas moins intéressants. Ainsi du paramètre estimé du genre, qui joue à hauteur de -30\% du salaire pour les femmes : si l'écart de salaire --- net --- entre hommes et femmes semble davantage se situer aux environs de 13.5\%\footnote{\url{https://www.statista.com/statistics/1371618/benelux-gender-pay-gap/}}, notre résultat, au-delà des spécificités éventuelles inhérentes à la base de données, montre l'ampleur de l'écart lorsque l'on considère le brut --- en particulier dans des États dont la fiscalité progressive a tendance a estomper les différences de rémunération. Par ailleurs, il est intéressant de noter que ce \textit{gender pay gap} varie en fonction du niveau d'études, les différences étant plus marquées chez les moins diplômés (voir tableau~\ref{tab:chow}). Sur le plan de la méthode, il pourrait être intéressant dans le cadre d'une étude plus approfondie, de réaliser des régressions linéaires en différenciant systématique les coefficients en fonction des sous-groupes (différenciés à partie du genre, du niveau de diplôme, etc) afin obtenir des résultats plus fins et plus aisément comparables vis-à-vis de la littérature existante. 
+         Notre contribution, qui vient en grande partie corroborer des résultats précédemment établis ouvre néanmoins la voie à des axes de recherche originaux. S'il ne s'agit certes que d'un instantané, d'une présentation de l'influence de différents paramètres sur le salaire brut à un moment donné, certains résultats de notre modèle n'en sont pas moins intéressants. Ainsi du paramètre estimé du genre, qui joue à hauteur de -30\% du salaire pour les femmes : si l'écart de salaire --- net --- entre hommes et femmes semble davantage se situer aux environs de 13.5\%\footnote{\url{https://www.statista.com/statistics/1371618/benelux-gender-pay-gap/}}, notre résultat, au-delà des spécificités éventuelles inhérentes à la base de données, montre l'ampleur de l'écart lorsque l'on considère le brut --- en particulier dans des États dont la fiscalité progressive a tendance a estomper les différences de rémunération. Par ailleurs, il est intéressant de noter que ce \textit{gender pay gap} varie en fonction du niveau d'études, les différences étant plus marquées chez les moins diplômés (voir tableau \ref{tab:chow}). Sur le plan de la méthode, il pourrait être intéressant dans le cadre d'une étude plus approfondie, de réaliser des régressions linéaires en différenciant systématique les coefficients en fonction des sous-groupes (différenciés à partie du genre, du niveau de diplôme, etc) afin obtenir des résultats plus fins et plus aisément comparables vis-à-vis de la littérature existante. 
 
-\printbibliography
+\vspace{0,3cm}
+
+Toutes nos analyses ont été réalisées à l'aide du logiciel statistique R (version 4.2.1, R Core Team 2022). Les différents paquets utilisés sont listés en page~\pageref{sec:ref}. Ce document a été écrit avec \LaTeX. 
+
+\nocite{*}
+\printbibliography[notkeyword={Rsoftware}, title={Bibliographie}]
+
+\printbibliography[keyword={Rsoftware}, title={Logiciels et paquets}]
+\label{sec:ref}
 
 \appendix
 \appendixpage
@@ -374,4 +379,4 @@ Issue de l'enquête \textit{Background variables}, il s'agit du nombre d'enfants
 
 \end{document}
 
-[a]vu avec Richard, ça ne marche pas, il faudra corriger ce passage
+
