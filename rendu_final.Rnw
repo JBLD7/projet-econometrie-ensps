@@ -317,7 +317,7 @@ print(xtable(modele_robust[, c(1, 2, 3, 4)], caption="Paramètres estimés du mo
 
 Nous avons tout d’abord préféré effectuer une analyse en log-niveau, le log limitant les risques d’hétéroscédasticité en \enquote{écrasant} les observations sans les fausser. À première vue, les paramètres de nos 6 régresseurs de base sur la variable expliquée paraissent plutôt cohérents à ce qui est observé dans la littérature, comme le montre le tableau \ref{tb:lm1}, l’âge a une influence positive mais assez négligeable (paramètre de 0,008), le genre a une forte influence négative sur le salaire pour les femmes. Les heures de travail ont évidemment une influence positive forte : 1 heure travaillée en plus par semaine augmente d’environ 1,4\% le log du revenu (voir graphique~\ref{fig:heureslogrevenu}).
 
-<< echo=FALSE, results='hide'>>=
+<< echo=FALSE, results='hide', message=FALSE>>=
 library(ggplot2)
 p <- ggplot(data, aes(x = heures, y = log_revenu)) + 
   geom_point(col="steelblue", size=3) +

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.4.24)  19 MAY 2023 11:32
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.4.24)  19 MAY 2023 11:45
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1000,33 +1000,29 @@ File: figure/exp_age.pdf Graphic file (type pdf)
 Package pdftex.def Info: figure/exp_age.pdf  used on input line 151.
 (pdftex.def)             Requested size: 292.77629pt x 195.18674pt.
  [3 <./figure/exp_age.pdf>]
-
-LaTeX Font Warning: Font shape `T1/zi4/m/it' undefined
-(Font)              using `T1/zi4/m/n' instead on input line 192.
-
 <figure/heures_logrevenu.pdf, id=151, 1084.05pt x 722.7pt>
 File: figure/heures_logrevenu.pdf Graphic file (type pdf)
 <use figure/heures_logrevenu.pdf>
-Package pdftex.def Info: figure/heures_logrevenu.pdf  used on input line 197.
+Package pdftex.def Info: figure/heures_logrevenu.pdf  used on input line 192.
 (pdftex.def)             Requested size: 292.77629pt x 195.18674pt.
-[4 <./figure/heures_logrevenu.pdf>]
+ [4 <./figure/heures_logrevenu.pdf>]
 LaTeX Font Info:    Font shape `T1/zi4/b/n' will be
-(Font)              scaled to size 12.0pt on input line 204.
+(Font)              scaled to size 12.0pt on input line 199.
 LaTeX Font Info:    Font shape `T1/zi4/m/n' will be
-(Font)              scaled to size 6.0pt on input line 214.
+(Font)              scaled to size 6.0pt on input line 209.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <5> on input line 225.
+(Font)              <5> on input line 220.
 
-Overfull \hbox (42.49033pt too wide) in paragraph at lines 225--238
+Overfull \hbox (42.49033pt too wide) in paragraph at lines 220--233
 [][] 
  []
 
 [5{/usr/local/texlive/2023/texmf-dist/fonts/enc/dvips/lm/lm-mathex.enc}]
 [6]
 LaTeX Font Info:    Font shape `T1/zi4/m/n' will be
-(Font)              scaled to size 9.0pt on input line 280.
+(Font)              scaled to size 9.0pt on input line 275.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <9> on input line 280.
+(Font)              <9> on input line 275.
 
 
 Package biblatex Warning: Split bibliography detected.
@@ -1048,29 +1044,26 @@ Package biblatex Warning: Split bibliography detected.
 (biblatex)                '\BiblatexSplitbibDefernumbersWarningOff'.
 
 
-Underfull \hbox (badness 4686) in paragraph at lines 317--317
+Underfull \hbox (badness 4686) in paragraph at lines 312--312
 []|\T1/lmr/m/n/9 3. ha-vo/vwo (hi-gher se-con-dary edu-
  []
 
 
-Overfull \hbox (24.0pt too wide) in paragraph at lines 311--326
+Overfull \hbox (24.0pt too wide) in paragraph at lines 306--321
 [][] 
  []
 
 [8]
-Overfull \hbox (24.0pt too wide) in paragraph at lines 336--345
+Overfull \hbox (24.0pt too wide) in paragraph at lines 331--340
 [][] 
  []
 
 <figure/educ.pdf, id=214, 1084.05pt x 722.7pt>
 File: figure/educ.pdf Graphic file (type pdf)
 <use figure/educ.pdf>
-Package pdftex.def Info: figure/educ.pdf  used on input line 352.
+Package pdftex.def Info: figure/educ.pdf  used on input line 347.
 (pdftex.def)             Requested size: 292.77629pt x 195.18674pt.
 [9 <./figure/educ.pdf>] [10] (./rendu_final.aux)
-
-LaTeX Font Warning: Some font shapes were not available, defaults substituted.
-
 Package rerunfilecheck Info: File `rendu_final.out' has not changed.
 (rerunfilecheck)             Checksum: A6E23EFE5F0E7EC11A215E606D62597C;4242.
 Package logreq Info: Writing requests to 'rendu_final.run.xml'.
@@ -1078,10 +1071,10 @@ Package logreq Info: Writing requests to 'rendu_final.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 24091 strings out of 476001
- 421007 string characters out of 5789199
- 1872074 words of memory out of 5000000
- 44187 multiletter control sequences out of 15000+600000
+ 24089 strings out of 476001
+ 420979 string characters out of 5789199
+ 1871074 words of memory out of 5000000
+ 44185 multiletter control sequences out of 15000+600000
  584023 words of font info for 73 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  75i,12n,76p,2022b,1765s stack positions out of 10000i,1000n,20000p,200000b,200000s
@@ -1102,7 +1095,7 @@ e/2023/texmf-dist/fonts/type1/public/lm/lmr9.pfb></usr/local/texlive/2023/texmf
 s/type1/public/lm/lmri9.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/pub
 lic/lm/lmsy10.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/lm/lms
 y6.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/lm/lmsy8.pfb>
-Output written on rendu_final.pdf (10 pages, 876723 bytes).
+Output written on rendu_final.pdf (10 pages, 875857 bytes).
 PDF statistics:
  336 PDF objects out of 1000 (max. 8388607)
  268 compressed objects within 3 object streams
